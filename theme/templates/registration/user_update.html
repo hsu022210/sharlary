@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block body %}
+
+        <section class="jumbotron background-grey">
+            <div class="container">
+
+                    <h2 class="jumbotron-heading text-center bold"><i class="fa fa-pencil" aria-hidden="true"></i> <strong>{% trans "更改個人資訊" %}</strong></h2>
+                    <br>
+
+                    <form method="post" action="">{% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-6 offset-sm-3">
+
+                                <div class="form-group">
+                                    <label for="first_name">First name</label>
+                                    <input type="text" id="first_name" class="form-control" placeholder="First name" name="first_name" value="{{user.first_name}}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="last_name">Last name</label>
+                                    <input type="text" id="last_name" class="form-control" placeholder="Last name" name="last_name" value="{{user.last_name}}" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="username">Email address</label>
+                                    <input type="email" id="username" class="form-control" placeholder="Email address" name="username" value="{{user.username}}" required>
+                                </div>
+
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-8">
+                                        <button type="submit" class="btn btn-outline-primary btn-block">{% trans "更改" %}</button>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="{% url 'index' %}" class="btn btn-outline-danger btn-block">{% trans "取消" %}</a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </form>
+            </div>
+        </section>
+
+{% endblock %}
+
+{% block extraJS %}
+    {% if form.errors %}
+        {{ form.errors }}
+    {% get_current_language as LANGUAGE_CODE %}
+        <script src="{% static 'js/sweet_alert2_form_error.js' %}" title="{% trans '更改失敗' %}" lang="{{ LANGUAGE_CODE }}"></script>
+    {% endif %}
+{% endblock %}

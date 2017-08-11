@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block body %}
+
+        <section class="jumbotron background-grey">
+            <div class="container">
+
+                {% if request.user.is_authenticated %}
+                    <div class="text-center">
+                        <div class="card-block">
+                            <h5 class="card-title">{{user.first_name}} {% trans "您已經登入囉" %}</h5>
+                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <a href="{% url 'index' %}" class="btn btn-primary">{% trans "回首頁" %}</a>
+                        </div>
+                    </div>
+                {% else %}
+
+                    <h2 class="jumbotron-heading text-center bold"><strong>{% trans "登入" %}</strong></h2>
+                    <br>
+
+                    <form method="post" action="">{% csrf_token %}
+                        <div class="row">
+                            <div class="col-sm-6 offset-sm-3">
+                                <div class="form-group">
+                                    <label for="username" class="sr-only">Email address</label>
+                                    <input type="email" id="username" class="form-control" placeholder="Email address" name="username" required autofocus>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password" class="sr-only">Password</label>
+                                    <input type="password" id="password" class="form-control" placeholder="Password" name="password" required>
+                                </div>
+
+                                <br>
+
+                                <button type="submit" class="btn btn-primary btn-block">{% trans "登入" %}</button>
+                            </div>
+                        </div>
+                    </form>
+                <br>
+                <br>
+
+                <div class="row text-center">
+                    <div class="col-sm-6 offset-sm-3">
+                        <h5 class="text-muted">
+                            <a href="{% url 'index' %}" class="text-primary" style="text-decoration:inherit;">{% trans "忘記密碼？" %}</a>
+                        </h5>
+                    </div>
+                </div>
+                <br>
+                <div class="row text-center">
+                    <div class="col-sm-6 offset-sm-3">
+                        <h5 class="text-muted">
+                            {% trans "還不是會員？" %}&nbsp;&nbsp;
+                            <a href="{% url 'index' %}" class="text-primary" style="text-decoration:inherit;">{% trans "註冊" %} <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                        </h5>
+                    </div>
+                </div>
+
+                {% endif %}
+                <br>
+                <br>
+
+            </div>
+        </section>
+
+{% endblock %}
+
+{% block extraJS %}
+    {% if form.errors %}
+        {{ form.errors }}
+    {% get_current_language as LANGUAGE_CODE %}
+        <script src="{% static 'js/sweet_alert2_form_error.js' %}" title="{% trans '登入失敗' %}" lang="{{ LANGUAGE_CODE }}"></script>
+    {% endif %}
+{% endblock %}

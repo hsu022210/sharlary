@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block body %}
+
+    <div class="album text-muted">
+      <div class="container">
+
+        <div class="row">
+            <div class="col-md-6 col-lg-5">
+
+                <div class="card card-custom">
+                  <div class="card-block">
+                    <h4 class="card-title"> {{ r.name }} </h4>
+                    <p class="card-text"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;薪資數據件數：{{ r.salary.count }} </p>
+                    <p class="card-text text-right">
+                        {% if user.is_authenticated %}
+                            {% if user_saved %}
+                            <i class="material-icons pink user_saved_list pointer" data-company_id="{{ r.id }}" data-save_restaurant_type="unsave">favorite</i>
+                            {% else %}
+                            <i class="material-icons pink user_saved_list pointer" data-company_id="{{ r.id }}" data-save_restaurant_type="save">favorite_border</i>
+                            {% endif %}
+                        {% else %}
+                        <a href="{% url 'login' %}"><i class="material-icons pink">favorite_border</i></a>
+                        {% endif %}
+                    </p>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item"> {{r.country}}{{r.city}}{{r.street}} </li>
+                    <li class="list-group-item">
+                        <span class="text-primary">
+                            <a href="{% url 'index' %}?search_query_category={{ r.category }}">#{{ r.category }}</a>&nbsp;
+                            <a href="{% url 'index' %}?search_query_city={{ r.city }}">#{{ r.city }}</a>
+                        </span>
+                    </li>
+                  </ul>
+                  <div class="card-block text-primary">
+                      <a href="{{r.website}}" class="card-link">{% trans "公司官網" %}</a>
+                  </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6 col-lg-7">
+                <iframe
+                        width="100%"
+                        height="300vh"
+                        frameborder="0" style="border:0"
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAVOibQwcgHJDKKM9DnjjvfT9rHSS26PPc&q={{r.country}}{{r.city}}{{r.street}}&zoom=15&language=zh_TW" allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+          <br>
+
+          <div id="accordion" role="tablist" aria-multiselectable="true">
+              <div class="row">
+                {% for salary in r.salary.all %}
+                  <div class="col-md-4 mb-2">
+                      <div class="card card-inverse card-primary">
+                        <div class="card-header" role="tab" id="heading{{salary.id}}">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse{{salary.id}}" aria-expanded="false" aria-controls="collapse{{salary.id}}">
+                              <h6 class="mb-0">
+                                {{salary.title}} ${{salary.monthly_pay}}
+                                <p class="card-text pull-right"><small>{{salary.update_time|date:"Y/m/d"}}</small></p>
+                              </h6>
+                            </a>
+                        </div>
+                        <div id="collapse{{salary.id}}" class="collapse" role="tabpanel" aria-labelledby="heading{{salary.id}}">
+                          <div class="card-block text-white">
+                              <p>相關工作經驗：{{salary.related_expr}}年</p>
+                              <p>教育程度：{{salary.education}} {{salary.school}} {{salary.major}}</p>
+                              <p>其他：{{salary.other}}</p>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                {% endfor %}
+              </div>
+          </div>
+
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block extraJS %}
+    <script src="{% static 'js/user_save_restaurant.js' %}" ajax_url="{% url 'user_save_company' %}" csrf_token="{{ csrf_token }}"></script>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block body %}
+    <section class="jumbotron">
+        <div class="container">
+
+            <h2 class="jumbotron-heading text-center"><i class="fa fa-plus-square-o" aria-hidden="true"></i> 新增公司</h2>
+            <br>
+            <form action="" method="post">{% csrf_token %}
+
+                <div class="form-group">
+                    <label for="name">公司名稱</label>
+                    <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter company name" name="name" maxlength="50" required>
+                    <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                </div>
+
+                <div class="form-group">
+                    <label for="website">官網網址</label>
+                    <input type="url" class="form-control" id="website" placeholder="Enter company url (optional)" name="website">
+                </div>
+
+                <div class="form-group">
+                    <label for="country">國家</label>
+                    <select class="form-control" id="country" name="country" required>
+                      <option>台灣</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="city">城市</label>
+                    <select class="form-control" id="city" name="city" required>
+                        <option>台北市</option>
+                        <option>新北市</option>
+                        <option>桃園市</option>
+                        <option>新竹市</option>
+                        <option>台中市</option>
+                        <option>嘉義市</option>
+                        <option>台南市</option>
+                        <option>高雄市</option>
+                        <option>屏東市</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="street">地址</label>
+                    <input type="text" class="form-control" id="street" placeholder="ex: 左營區博愛二路99號" name="street" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">類型</label>
+                    <select class="form-control" id="category" name="category" required>
+                      <option>軟體業</option>
+                      <option>電子業</option>
+                      <option>法律業</option>
+                      <option>醫療業</option>
+                      <option>服務業</option>
+                      <option>金融業</option>
+                      <option>保險業</option>
+                      <option>餐飲業</option>
+                      <option>營造業</option>
+                      <option>傳產業</option>
+                      <option>貿易業</option>
+                      <option>設計業</option>
+                      <option>顧問業</option>
+                      <option>自由業</option>
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="col-8">
+                        <button type="submit" class="btn btn-outline-primary btn-block">新增</button>
+                    </div>
+                    <div class="col-4">
+                        <a href="{% url 'index' %}" class="btn btn-outline-danger btn-block">取消</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extraJS %}
+    {% if form.errors %}
+        {{ form.errors }}
+        <script src="{% static 'js/sweet_alert2_form_error.js' %}" title="表格有誤"></script>
+    {% elif saved %}
+        <script src="{% static 'js/sweet_alert2_form_success.js' %}" title="新增成功"></script>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+*.sqlite3
+.idea/
+*.pyc
+email_info.py
+sharlary_venv/
+__pycache__

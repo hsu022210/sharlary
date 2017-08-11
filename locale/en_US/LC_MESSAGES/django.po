@@ -1,0 +1,106 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-11 11:05+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: theme/templates/components/header.html:12
+msgid "想獲得Eaggie優惠嗎？"
+msgstr ""
+
+#: theme/templates/components/header.html:17
+msgid "關於Eaggie"
+msgstr ""
+
+#: theme/templates/components/header.html:18
+msgid "每個月只要$199，即可享受Eaggie會員獨有的餐廳優惠價格"
+msgstr ""
+
+#: theme/templates/components/header.html:24
+msgid "選項"
+msgstr ""
+
+#: theme/templates/components/header.html:26
+msgid "更改個人資訊"
+msgstr ""
+
+#: theme/templates/components/header.html:33
+msgid "登出"
+msgstr ""
+
+#: theme/templates/components/header.html:35
+msgid "登入"
+msgstr ""
+
+#: theme/templates/index.html:12
+msgid "加入Eaggie，享受眾多餐廳優惠"
+msgstr ""
+
+#: theme/templates/index.html:16
+msgid "加入會員"
+msgstr ""
+
+#: theme/templates/index.html:17
+msgid "了解更多"
+msgstr ""
+
+#: theme/templates/index.html:39 theme/templates/index.html:81
+msgid "收藏清單裡搜尋"
+msgstr ""
+
+#: theme/templates/index.html:41 theme/templates/index.html:83
+msgid "搜尋"
+msgstr ""
+
+#: theme/templates/index.html:54
+msgid "城市"
+msgstr ""
+
+#: theme/templates/index.html:60
+msgid "類型"
+msgstr ""
+
+#: theme/templates/index.html:75
+msgid "餐廳名字"
+msgstr ""
+
+#: theme/templates/index.html:134
+msgid "無餐廳符合搜尋結果"
+msgstr ""
+
+#: theme/templates/index.html:137
+msgid "還沒收藏任何餐廳哦"
+msgstr ""
+
+#: theme/templates/index.html:139
+msgid "尚無餐廳加入Eaggie"
+msgstr ""
+
+#: theme/templates/index.html:152
+msgid "登入成功"
+msgstr ""
+
+#: theme/templates/index.html:154
+msgid "已登出"
+msgstr ""
+
+#: theme/templates/index.html:156
+msgid "註冊成功並登入"
+msgstr ""
+
+#: theme/templates/index.html:158
+msgid "更改成功"
+msgstr ""
