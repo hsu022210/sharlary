@@ -27,9 +27,18 @@ class ProfileForm(ModelForm):
         fields = ['first_name', 'last_name', 'username']
 
 
+class UserExtend(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_extend')
+    company = models.ManyToManyField(Company, related_name='user_extend')
+
+    def __str__(self):
+        return self.user.username
+
+
 class Salary(models.Model):
     email = models.EmailField()
     company = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='salary')
+    user_extend = models.ForeignKey(UserExtend, on_delete=models.CASCADE, related_name='salary', null=True)
     title = models.CharField(max_length=50)
     monthly_pay = models.PositiveIntegerField()
     related_expr = models.PositiveSmallIntegerField()
@@ -37,10 +46,7 @@ class Salary(models.Model):
     school = models.CharField(max_length=50, null=True, blank=True)
     major = models.CharField(max_length=50, null=True, blank=True)
     update_time = models.DateTimeField(auto_now=True)
-    other = models.TextField(max_length=300)
+    other = models.TextField(max_length=300, null=True, blank=True)
 
-
-class UserExtend(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_extend')
-    salary = models.OneToOneField(Salary, on_delete=models.CASCADE, related_name='user_extend', null=True)
-    company = models.ManyToManyField(Company, related_name='user_extend')
+    def __str__(self):
+        return self.email + " " + str(self.monthly_pay)

@@ -176,8 +176,8 @@ def register(request):
             user.last_name = request.POST["last_name"].capitalize()
             user.save()
             user_extend_object = UserExtend(user=user)
-            if Salary.objects.get(email=user.email):
-                user_extend_object.salary = Salary.objects.get(email=user.email)
+            for salary in Salary.objects.filter(email=user.email):
+                user_extend_object.salary.add(salary)
             user_extend_object.save()
 
             send_mail(
@@ -235,6 +235,7 @@ def add_company(request):
         c = Company(name=name, website=website, country=country, city=city, street=street, category=category, latitude=latitude, longitude=longitude)
         c.save()
         ctx['saved'] = True
+        ctx['company_id'] = c.id
     return render(request, 'add_company.html', ctx)
 
 
@@ -247,3 +248,35 @@ class MyPasswordChangeView(PasswordChangeView):
     def get_context_data(self, **kwargs):
         ctx = super(MyPasswordChangeView, self).get_context_data(**kwargs)
         return ctx
+
+
+def share_salary(request, company_id):
+    ctx = {}
+    company = get_object_or_404(Company, id=company_id)
+    if request.method == "POST":
+        if request.user.is_authenticated():
+            email = request.user.email
+        else:
+            email = request.POST["email"]
+        title = request.POST["title"]
+        monthly_pay = request.POST["monthly_pay"]
+        related_expr = request.POST["related_expr"]
+        education = request.POST["education"]
+        school = request.POST["school"]
+        major = request.POST["major"]
+        other = request.POST["other"]
+
+        s = Salary(email=email, company=company, title=title, monthly_pay=monthly_pay, related_expr=related_expr,
+                   education=education, school=school, major=major, other=other)
+        s.save()
+        company.update_time = s.update_time
+        company.save()
+        if request.user.is_authenticated():
+            user_object = get_object_or_404(User, id=request.user.id)
+            user_extend_object = user_object.user_extend
+            user_extend_object.salary.add(s)
+            user_extend_object.save()
+
+        ctx['saved'] = True
+    ctx['company'] = company
+    return render(request, 'share_salary.html', ctx)

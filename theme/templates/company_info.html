@@ -50,6 +50,7 @@
                         frameborder="0" style="border:0"
                         src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAVOibQwcgHJDKKM9DnjjvfT9rHSS26PPc&q={{r.country}}{{r.city}}{{r.street}}&zoom=15&language=zh_TW" allowfullscreen>
                 </iframe>
+                <a href="{% url 'share_salary' r.id %}" class="btn btn-warning btn-block">{% trans "分享薪資" %} <i class="fa fa-plus" aria-hidden="true"></i></i></a>
             </div>
         </div>
 
@@ -57,7 +58,7 @@
 
           <div id="accordion" role="tablist" aria-multiselectable="true">
               <div class="row">
-                {% for salary in r.salary.all %}
+                {% for salary in r.salary.all|dictsortreversed:"update_time" %}
                   <div class="col-md-4 mb-2">
                       <div class="card card-inverse card-primary">
                         <div class="card-header" role="tab" id="heading{{salary.id}}">
@@ -71,8 +72,13 @@
                         <div id="collapse{{salary.id}}" class="collapse" role="tabpanel" aria-labelledby="heading{{salary.id}}">
                           <div class="card-block text-white">
                               <p>相關工作經驗：{{salary.related_expr}}年</p>
-                              <p>教育程度：{{salary.education}} {{salary.school}} {{salary.major}}</p>
-                              <p>其他：{{salary.other}}</p>
+                              <p>教育程度：{{salary.education}}</p>
+                              {% if salary.school or salary.major %}
+                                <p>學校科系：{{salary.school}} {{salary.major}}</p>
+                              {% endif %}
+                              {% if salary.other %}
+                                <p>其他：{{salary.other}}</p>
+                              {% endif %}
                           </div>
                         </div>
                       </div>

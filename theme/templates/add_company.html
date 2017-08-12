@@ -4,7 +4,7 @@
 {% load static %}
 
 {% block body %}
-    <section class="jumbotron">
+    <section class="jumbotron background-grey">
         <div class="container">
 
             <h2 class="jumbotron-heading text-center"><i class="fa fa-plus-square-o" aria-hidden="true"></i> 新增公司</h2>
@@ -12,7 +12,7 @@
             <form action="" method="post">{% csrf_token %}
 
                 <div class="form-group">
-                    <label for="name">公司名稱</label>
+                    <label for="name">公司名稱*</label>
                     <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter company name" name="name" maxlength="50" required>
                     <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
                 </div>
@@ -23,14 +23,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="country">國家</label>
+                    <label for="country">國家*</label>
                     <select class="form-control" id="country" name="country" required>
                       <option>台灣</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="city">城市</label>
+                    <label for="city">城市*</label>
                     <select class="form-control" id="city" name="city" required>
                         <option>台北市</option>
                         <option>新北市</option>
@@ -45,12 +45,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="street">地址</label>
+                    <label for="street">地址*</label>
                     <input type="text" class="form-control" id="street" placeholder="ex: 左營區博愛二路99號" name="street" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="category">類型</label>
+                    <label for="category">類型*</label>
                     <select class="form-control" id="category" name="category" required>
                       <option>軟體業</option>
                       <option>電子業</option>
@@ -66,6 +66,7 @@
                       <option>設計業</option>
                       <option>顧問業</option>
                       <option>自由業</option>
+                      <option>其他</option>
                     </select>
                 </div>
 
@@ -85,8 +86,9 @@
 {% block extraJS %}
     {% if form.errors %}
         {{ form.errors }}
-        <script src="{% static 'js/sweet_alert2_form_error.js' %}" title="表格有誤"></script>
+        {% get_current_language as LANGUAGE_CODE %}
+        <script src="{% static 'js/sweet_alert2_form_error.js' %}" title="{% trans '表格有誤' %}" lang="{{ LANGUAGE_CODE }}"></script>
     {% elif saved %}
-        <script src="{% static 'js/sweet_alert2_form_success.js' %}" title="新增成功"></script>
+        <script src="{% static 'js/sweet_alert2_form_success.js' %}" title="{% trans '新增成功' %}" redirect_url="{% url 'share_salary' company_id %}"></script>
     {% endif %}
 {% endblock %}

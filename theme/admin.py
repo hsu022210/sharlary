@@ -32,3 +32,16 @@ class UserAdmin(BaseUserAdmin):
 # Re-register UserAdmin
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+
+
+class SalaryAdmin(admin.ModelAdmin):
+    list_display = ('email', 'user_extend', 'company', 'title', 'monthly_pay', 'update_time')
+
+admin.site.register(Salary, SalaryAdmin)
+
+
+class UserExtendAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+    inlines = (SalaryInline,)
+
+admin.site.register(UserExtend, UserExtendAdmin)
