@@ -10,6 +10,8 @@ from django.http import JsonResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse_lazy
 import requests
+from django.core.mail import send_mail
+from django.contrib.auth.views import PasswordChangeView
 # Create your views here.
 
 
@@ -174,15 +176,17 @@ def register(request):
             user.last_name = request.POST["last_name"].capitalize()
             user.save()
             user_extend_object = UserExtend(user=user)
+            if Salary.objects.get(email=user.email):
+                user_extend_object.salary = Salary.objects.get(email=user.email)
             user_extend_object.save()
 
-            # send_mail(
-            #     'Hi {0} ，歡迎加入Eaggie！'.format(user.first_name),
-            #     '{0}！想開始大吃特吃了嗎?! 每個月只要$199，即可擁有Eaggie合作餐廳的優惠價格，快去看看！\n\n\n The Eaggie Team'.format(user.first_name),
-            #     'hsu022210@gmail.com',
-            #     [user.email],
-            #     fail_silently=False,
-            # )
+            send_mail(
+                '{0} ，歡迎加入Sharlary！'.format(user.first_name),
+                'Hi {0}！快快分享薪資一起讓就業環境變得更好！\n\n\n The Eaggie Team'.format(user.first_name),
+                'hsu022210@gmail.com',
+                [user.email],
+                fail_silently=False,
+            )
             return redirect(reverse_lazy('index') + '?redirect_type=register')
     else:
         form = UserCreationForm()
@@ -232,3 +236,14 @@ def add_company(request):
         c.save()
         ctx['saved'] = True
     return render(request, 'add_company.html', ctx)
+
+
+class MyPasswordChangeView(PasswordChangeView):
+    template_name = "registration/user_password_change.html"
+
+    def get_success_url(self):
+        return reverse_lazy('index') + "?redirect_type=password_change"
+
+    def get_context_data(self, **kwargs):
+        ctx = super(MyPasswordChangeView, self).get_context_data(**kwargs)
+        return ctx
