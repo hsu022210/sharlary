@@ -14,7 +14,7 @@
             {% else %}
             <h1 class="jumbotron-heading text-white display-4"><strong>Sharlary</strong></h1>
             <br>
-            <p class="lead text-white"><strong>{% trans "匿名分享薪資，提升就業環境" %}</strong></p>
+            <p class="lead text-white"><strong>{% trans "匿名分享薪資，一覽企業待遇" %}</strong></p>
             <br>
             <p>
                 {% if not user.is_authenticated %}
@@ -114,7 +114,9 @@
                           {% for s in c.salary.all|dictsortreversed:"update_time"|slice:":3" %}
                           <li class="list-group-item text-primary">{{ s.title }}: ${{ s.monthly_pay }}</li>
                           {% endfor %}
-                          <li class="list-group-item"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;薪資數據件數: {{c.salary.count}}</li>
+                          <li class="list-group-item justify-content-between"><span><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;薪資數據件數: {{c.salary.count}}</span>
+                              <span><i class="fa fa-caret-down fa-lg" aria-hidden="true"></i> more</span>
+                          </li>
                       </ul>
 
                       <div class="card-block text-primary">

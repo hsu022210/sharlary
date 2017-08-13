@@ -7,7 +7,7 @@
     <section class="jumbotron background-grey">
         <div class="container">
 
-            <h2 class="jumbotron-heading text-center"><i class="fa fa-money" aria-hidden="true"></i> {% trans "分享薪資" %}</h2>
+            <h2 class="jumbotron-heading text-center"><i class="fa fa-pencil" aria-hidden="true"></i> {% trans "更改薪資" %}</h2>
             <br>
             <form action="" method="post">{% csrf_token %}
 
@@ -15,50 +15,41 @@
                     <!--<label for="name">公司名稱*</label>-->
                     <!--<input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="{{company.name}}" name="name" maxlength="50" required>-->
                     <h5 class="form-control-static text-center">
-                        任職公司: <a href="{% url 'company_info' company.id %}" class="text-primary">{{company.name}}</a>
+                        任職公司: <a href="{% url 'company_info' salary.company.id %}" class="text-primary">{{salary.company.name}}</a>
                         <br>
                         <br>
-                        <p class="text-muted"><small>{{company.country}}{{company.city}}{{company.street}}</small></p>
+                        <p class="text-muted"><small>{{salary.company.country}}{{salary.company.city}}{{salary.company.street}}</small></p>
                     </h5>
                 </div>
 
                 <div class="form-group">
                     <label for="title">職稱*</label>
-                    <input type="text" class="form-control" id="title" placeholder="ex: 業務助理" name="title" required>
+                    <input type="text" class="form-control" id="title" placeholder="ex: 業務助理" name="title" value="{{salary.title}}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="monthly_pay">月薪*</label>
                     <div class="input-group">
                         <span class="input-group-addon">$</span>
-                        <input type="number" class="form-control" id="monthly_pay" placeholder="ex: 50000" name="monthly_pay" required>
+                        <input type="number" class="form-control" id="monthly_pay" placeholder="ex: 50000" name="monthly_pay" value="{{salary.monthly_pay}}" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="related_expr">相關工作經驗年資*</label>
-                    <input type="number" class="form-control" id="related_expr" placeholder="ex: 3" name="related_expr" required>
+                    <input type="number" class="form-control" id="related_expr" placeholder="ex: 3" name="related_expr" value="{{salary.related_expr}}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="education">教育程度*</label>
                     <select class="form-control custom-select" id="education" name="education" required>
                         {% for op in education_options %}
-                        <option> {{op}} </option>
+                            {% if op == salary.education %}
+                                <option selected="selected"> {{op}} </option>
+                            {% else %}
+                                <option> {{op}} </option>
+                            {% endif %}
                         {% endfor %}
-                        <!--<option>國小</option>-->
-                        <!--<option>國中</option>-->
-                        <!--<option>高中</option>-->
-                        <!--<option>高職</option>-->
-                        <!--<option>公立大學</option>-->
-                        <!--<option>私立大學</option>-->
-                        <!--<option>海外大學</option>-->
-                        <!--<option>公立碩士</option>-->
-                        <!--<option>私立碩士</option>-->
-                        <!--<option>海外碩士</option>-->
-                        <!--<option>公立博士</option>-->
-                        <!--<option>私立博士</option>-->
-                        <!--<option>海外博士</option>-->
                     </select>
                 </div>
 
@@ -66,7 +57,7 @@
                     <label for="email">Email*</label>
                     {% if user.is_authenticated %}
                     <fieldset disabled>
-                        <input type="email" id="email" class="form-control" value="{{user.email}}" name="email" required>
+                        <input type="email" id="email" class="form-control" value="{{salary.email}}" name="email" required>
                     </fieldset>
                     {% else %}
                     <input type="email" id="email" class="form-control" placeholder="Email address (用於日後修改薪資)" name="email" required>
@@ -75,25 +66,25 @@
 
                 <div class="form-group">
                     <label for="school">學校</label>
-                    <input type="text" class="form-control" id="school" placeholder="ex: 東吳大學" name="school">
+                    <input type="text" class="form-control" id="school" placeholder="ex: 東吳大學" name="school" value="{{salary.school}}">
                 </div>
 
                 <div class="form-group">
                     <label for="major">科系</label>
-                    <input type="text" class="form-control" id="major" placeholder="ex: 法律系" name="major">
+                    <input type="text" class="form-control" id="major" placeholder="ex: 法律系" name="major" value="{{salary.major}}">
                 </div>
 
                 <div class="form-group">
                     <label for="other">其他 (300字以內)</label>
-                    <textarea class="form-control" id="other" rows="3" name="other" placeholder="年終，認股，工作內容，上下班時間，心得" maxlength="300"></textarea>
+                    <textarea class="form-control" id="other" rows="3" name="other" placeholder="年終，認股，工作內容，上下班時間，心得" maxlength="300">{{salary.other}}</textarea>
                 </div>
 
                 <div class="row">
                     <div class="col-8">
-                        <button type="submit" class="btn btn-outline-primary btn-block">新增</button>
+                        <button type="submit" class="btn btn-outline-primary btn-block">更改</button>
                     </div>
                     <div class="col-4">
-                        <a href="{% url 'index' %}" class="btn btn-outline-danger btn-block">取消</a>
+                        <a href="{% url 'user_salary' %}" class="btn btn-outline-danger btn-block">取消</a>
                     </div>
                 </div>
             </form>
@@ -107,6 +98,6 @@
         {% get_current_language as LANGUAGE_CODE %}
         <script src="{% static 'js/sweet_alert2_form_error.js' %}" title="{% trans '表格有誤' %}" lang="{{ LANGUAGE_CODE }}"></script>
     {% elif saved %}
-        <script src="{% static 'js/sweet_alert2_form_success.js' %}" title="{% trans '分享成功' %}" redirect_url="{% url 'company_info' company.id %}"></script>
+        <script src="{% static 'js/sweet_alert2_form_success.js' %}" title="{% trans '更改成功' %}" redirect_url="{% url 'user_salary' %}"></script>
     {% endif %}
 {% endblock %}

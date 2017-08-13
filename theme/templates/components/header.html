@@ -6,16 +6,27 @@
     <div class="row">
         {% if user.is_authenticated %}
 
-        <div class="col-sm-7 py-4">
-            <h4 class="text-white">Hey！{{ user.first_name }}</h4>
-            <p class="text-white">
-                {% trans "快分享薪資為大環境盡一份力吧！" %} <a href="{% url 'index' %}" class="text-primary">Go</a>
-            </p>
-        </div>
+        {% if user.user_extend.salary %}
+            <div class="col-sm-7 py-4">
+                <h4 class="text-white">Hey！{{ user.first_name }}</h4>
+                <p class="text-white">
+                    {% trans "感謝您分享薪資，快看看Sharlary上哪間公司待遇好並收藏吧！" %}
+                </p>
+            </div>
+        {% else %}
+            <div class="col-sm-7 py-4">
+                <h4 class="text-white">Hey！{{ user.first_name }}</h4>
+                <p class="text-white">
+                    {% trans "快於Sharlary匿名分享薪資一起讓企業公司待遇透明化！" %} <a href="{% url 'search_company' %}" class="text-primary">Go</a>
+                </p>
+            </div>
+        {% endif %}
+
+
         {% else %}
           <div class="col-sm-7 py-4">
-            <h4 class="text-white"><a href="{% url 'index' %}">{% trans "關於Sharlary" %}</a></h4>
-            <p class="text-white">{% trans "分享自己的薪資，提升就業環境" %}！</p>
+            <h4 class="text-white">{% trans "關於Sharlary" %}</h4>
+            <p class="text-white">{% trans "希望透過大家匿名分享薪資讓待遇好的公司能被更多人看見" %}！</p>
           </div>
         {% endif %}
 

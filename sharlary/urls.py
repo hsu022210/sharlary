@@ -38,4 +38,5 @@ urlpatterns = [
     url(r'^search_company/$', search_company, name='search_company'),
     url(r'^share_salary/(?P<company_id>[0-9]+)$', share_salary, name='share_salary'),
     url(r'^user_salary/$', user_salary, name='user_salary'),
+    url(r'^user_salary_update/(?P<salary_id>[0-9]+)$', user_salary_update, name='user_salary_update'),
 ]

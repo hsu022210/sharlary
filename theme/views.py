@@ -215,6 +215,7 @@ def user_update(request):
         if form.is_valid():
             user = form.save()
             user.email = user.username
+            user.user_extend.salary.all().update(email=user.email)
             user.save()
         return redirect(reverse_lazy('index') + '?redirect_type=user_update')
     else:
@@ -227,6 +228,9 @@ def add_company(request):
     ctx = {}
     if request.method == "POST":
         name = request.POST["name"]
+        tmp = Company.objects.get(name=name)
+        if tmp:
+            return redirect('company_info', company_id=tmp.id)
         website = request.POST["website"]
         country = request.POST["country"]
         city = request.POST["city"]
@@ -288,6 +292,8 @@ def share_salary(request, company_id):
 
         ctx['saved'] = True
     ctx['company'] = company
+    ctx['education_options'] = ["國小", "國中", "高中", "高職", "公立大學", "私立大學", "海外大學",
+                                "公立碩士", "私立碩士", "海外碩士", "公立博士", "私立博士", "海外博士"]
     return render(request, 'share_salary.html', ctx)
 
 
@@ -309,6 +315,29 @@ def search_company(request):
 def user_salary(request):
     ctx = {}
     user_object = get_object_or_404(User, id=request.user.id)
-    salaries = user_object.user_extend.salary.all()
+    salaries = user_object.user_extend.salary.all().order_by('-update_time')
     ctx['salaries'] = salaries
     return render(request, 'user_salary.html', ctx)
+
+
+@login_required()
+def user_salary_update(request, salary_id):
+    ctx = {}
+    user_object = get_object_or_404(User, id=request.user.id)
+    salary_object = user_object.user_extend.salary.get(id=salary_id)
+    ctx['salary'] = salary_object
+
+    ctx['education_options'] = ["國小", "國中", "高中", "高職", "公立大學", "私立大學", "海外大學",
+                                "公立碩士", "私立碩士", "海外碩士", "公立博士", "私立博士", "海外博士"]
+
+    if request.method == 'POST':
+        form = SalaryForm(data=request.POST, instance=salary_object)
+        if form.is_valid():
+            salary = form.save()
+            salary.company.update_time = salary.update_time
+            salary.company.save()
+            ctx['saved'] = True
+    else:
+        form = SalaryForm(instance=salary_object)
+    ctx['form'] = form
+    return render(request, 'user_salary_update.html', ctx)

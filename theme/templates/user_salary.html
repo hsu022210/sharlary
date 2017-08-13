@@ -15,11 +15,16 @@
             {% for salary in salaries %}
             <div class="card">
                 <div class="card-block">
-                    <a href=" #" style="text-decoration:inherit;">
-                        <p class="card-text">{{salary.company}}&nbsp;
-                            <span class="pull-right text-muted">{{salary.title}} {{salary.monthly_pay}}&nbsp;
-                                        <i class="fa fa-chevron-right fa-lg" aria-hidden="true"></i>
-                                    </span>
+                    <a href="{% url 'user_salary_update' salary.id %}" style="text-decoration:inherit;">
+                        <p class="card-text">
+                            {{salary.company}}&nbsp;
+                            <span class="text-primary">
+                                {{salary.title}} {{salary.monthly_pay}}
+                            </span>
+                            <span class="pull-right text-muted">
+                                <small>{{ salary.update_time|date:"Y/m/d"}}</small>&nbsp;
+                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                            </span>
                         </p>
                     </a>
                 </div>
@@ -27,6 +32,8 @@
             <br>
             {% endfor %}
 
+            <p class="text-center"><a href="{% url 'search_company' %}" class="btn btn-outline-warning btn-block">{% trans "分享薪資" %}</a></p>
+            <p class="text-center"><a href="{% url 'index' %}" class="btn btn-outline-primary btn-block">{% trans "回首頁" %}</a></p>
 
         </div>
     </section>

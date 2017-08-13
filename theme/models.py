@@ -50,3 +50,9 @@ class Salary(models.Model):
 
     def __str__(self):
         return self.email + " " + str(self.monthly_pay)
+
+
+class SalaryForm(ModelForm):
+    class Meta:
+        model = Salary
+        fields = ['title', 'monthly_pay', 'related_expr', 'education', 'school', 'major', 'other']
