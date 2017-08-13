@@ -12,6 +12,7 @@ from django.core.urlresolvers import reverse_lazy
 import requests
 from django.core.mail import send_mail
 from django.contrib.auth.views import PasswordChangeView
+from django.db.models import Q
 # Create your views here.
 
 
@@ -68,12 +69,20 @@ def index(request):
             if "user_saved_list" in ctx:
                 for k in keywords_list:
                     result = saved_companies.filter(name__icontains=k)
+                    for company in saved_companies:
+                        if len(company.salary.all().filter(title__icontains=k)) > 0:
+                            qs = saved_companies.filter(id=company.id)
+                            result = result | qs
                     companies = companies | result
                     search_args = search_args + " " + k
             else:
                 for k in keywords_list:
-                    # result = Restaurant.objects.filter(Q(city__icontains=k) | Q(name__icontains=k))
+                    # result = Company.objects.filter(Q(city__icontains=k) | Q(name__icontains=k))
                     result = Company.objects.filter(name__icontains=k)
+                    for company in all_companies_qs:
+                        if len(company.salary.all().filter(title__icontains=k)) > 0:
+                            qs = all_companies_qs.filter(id=company.id)
+                            result = result | qs
                     companies = companies | result
                     search_args = search_args + " " + k
 
@@ -280,3 +289,26 @@ def share_salary(request, company_id):
         ctx['saved'] = True
     ctx['company'] = company
     return render(request, 'share_salary.html', ctx)
+
+
+def search_company(request):
+    ctx = {}
+    company_names = Company.objects.values_list("name", flat=True).distinct()
+    company_names = json.dumps(list(company_names), cls=DjangoJSONEncoder, ensure_ascii=False)
+    ctx['company_names'] = company_names
+
+    if request.method == "POST":
+        query_company_name = request.POST["company_name"]
+        companies = Company.objects.filter(name__icontains=query_company_name)
+        ctx['query_company_name'] = query_company_name
+        ctx['companies'] = companies
+    return render(request, 'search_company.html', ctx)
+
+
+@login_required()
+def user_salary(request):
+    ctx = {}
+    user_object = get_object_or_404(User, id=request.user.id)
+    salaries = user_object.user_extend.salary.all()
+    ctx['salaries'] = salaries
+    return render(request, 'user_salary.html', ctx)

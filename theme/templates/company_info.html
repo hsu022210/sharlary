@@ -36,9 +36,11 @@
                         </span>
                     </li>
                   </ul>
-                  <div class="card-block text-primary">
-                      <a href="{{r.website}}" class="card-link">{% trans "公司官網" %}</a>
-                  </div>
+                    {% if r.website %}
+                    <div class="card-block text-primary">
+                        <a href="{{r.website}}" class="card-link">{% trans "公司官網" %}</a>
+                    </div>
+                    {% endif %}
                 </div>
 
             </div>

@@ -35,5 +35,7 @@ urlpatterns = [
     url(r'^user_save_company/$', user_save_company, name='user_save_company'),
     url(r'^user_saved_list/$', user_saved_list, name='user_saved_list'),
     url(r'^add_company/$', add_company, name='add_company'),
+    url(r'^search_company/$', search_company, name='search_company'),
     url(r'^share_salary/(?P<company_id>[0-9]+)$', share_salary, name='share_salary'),
+    url(r'^user_salary/$', user_salary, name='user_salary'),
 ]

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block body %}
+    <section class="jumbotron background-grey">
+        <div class="container">
+
+            <h2 class="jumbotron-heading text-center"><i class="fa fa-money" aria-hidden="true"></i> {% trans "我的薪資" %}</h2>
+            <br>
+            <br>
+            <br>
+
+            {% for salary in salaries %}
+            <div class="card">
+                <div class="card-block">
+                    <a href=" #" style="text-decoration:inherit;">
+                        <p class="card-text">{{salary.company}}&nbsp;
+                            <span class="pull-right text-muted">{{salary.title}} {{salary.monthly_pay}}&nbsp;
+                                        <i class="fa fa-chevron-right fa-lg" aria-hidden="true"></i>
+                                    </span>
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+
+
+        </div>
+    </section>
+{% endblock %}
+
+{% block extraJS %}
+    {% if form.errors %}
+        {{ form.errors }}
+        {% get_current_language as LANGUAGE_CODE %}
+        <script src="{% static 'js/sweet_alert2_form_error.js' %}" title="{% trans '表格有誤' %}" lang="{{ LANGUAGE_CODE }}"></script>
+    {% elif saved %}
+        <script src="{% static 'js/sweet_alert2_form_success.js' %}" title="{% trans '新增成功' %}" redirect_url="{% url 'share_salary' company_id %}"></script>
+    {% endif %}
+    <script src="{% static 'js/auto_complete.js' %}" id_name="company_name" source="{{ company_names }}"></script>
+{% endblock %}
