@@ -1,1 +1,1 @@
-web: gunicorn sharlary.wsgi
+web: gunicorn --pythonpath sharlary sharlary.wsgi
