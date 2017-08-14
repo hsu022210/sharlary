@@ -158,5 +158,3 @@ GOOGLE_API_KEY = private_info.GOOGLE_API_KEY
 
 GOOGLE_RECAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify'
 GOOGLE_GEOCODE_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
-
-AUTH_PROFILE_MODULE = 'account.User'

@@ -14,7 +14,7 @@ from django.core.mail import send_mail
 from django.contrib.auth.views import PasswordChangeView
 from django.db.models import Q
 from sharlary import settings
-from django.core.mail import EmailMultiAlternatives
+from django.db import OperationalError
 # Create your views here.
 
 
@@ -171,8 +171,11 @@ def user_save_company(request):
         company_id = request.POST["company_id"]
 
         company_object = get_object_or_404(Company, id=company_id)
-        user_object = get_object_or_404(User, id=request.user.id)
-        user_extend_object = user_object.user_extend
+        try:
+            user_object = get_object_or_404(User, id=request.user.id)
+            user_extend_object = user_object.user_extend
+        except OperationalError:
+            user_extend_object = None
 
         if action == "save":
             user_extend_object.company.add(company_object)
@@ -183,7 +186,10 @@ def user_save_company(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        try:
+            form = UserCreationForm(request.POST)
+        except OperationalError:
+            form = None
         if form.is_valid():
             user = form.save()
             auth.login(request, user)
@@ -207,7 +213,10 @@ def register(request):
             )
             return redirect(reverse_lazy('index') + '?redirect_type=register')
     else:
-        form = UserCreationForm()
+        try:
+            form = UserCreationForm(request.POST)
+        except OperationalError:
+            form = None
     ctx = {'form': form}
     return render(request, 'registration/register.html', ctx)
 
@@ -220,7 +229,10 @@ def user_saved_list(request):
 @login_required
 def user_update(request):
     if request.method == 'POST':
-        form = ProfileForm(data=request.POST, instance=request.user)
+        try:
+            form = ProfileForm(data=request.POST, instance=request.user)
+        except OperationalError:
+            form = None
         if form.is_valid():
             user = form.save()
             user.email = user.username
@@ -228,7 +240,10 @@ def user_update(request):
             user.save()
         return redirect(reverse_lazy('index') + '?redirect_type=user_update')
     else:
-        form = ProfileForm(instance=request.user)
+        try:
+            form = ProfileForm(instance=request.user)
+        except OperationalError:
+            form = None
     ctx = {'form': form}
     return render(request, 'registration/user_update.html', ctx)
 
@@ -337,7 +352,10 @@ def search_company(request):
 @login_required()
 def user_salary(request):
     ctx = {}
-    user_object = get_object_or_404(User, id=request.user.id)
+    try:
+        user_object = get_object_or_404(User, id=request.user.id)
+    except OperationalError:
+        user_object = None
     salaries = user_object.user_extend.salary.all().order_by('-update_time')
     ctx['salaries'] = salaries
     return render(request, 'user_salary.html', ctx)
@@ -346,7 +364,10 @@ def user_salary(request):
 @login_required()
 def user_salary_update(request, salary_id):
     ctx = {}
-    user_object = get_object_or_404(User, id=request.user.id)
+    try:
+        user_object = get_object_or_404(User, id=request.user.id)
+    except OperationalError:
+        user_object = None
     salary_object = user_object.user_extend.salary.get(id=salary_id)
     ctx['salary'] = salary_object
 
