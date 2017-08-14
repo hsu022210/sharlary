@@ -22,10 +22,9 @@ class Company(models.Model):
 
 
 class ProfileForm(ModelForm):
-    pass
-#     class Meta:
-#         model = User
-#         fields = ['first_name', 'last_name', 'username']
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username']
 
 
 class UserExtend(models.Model):

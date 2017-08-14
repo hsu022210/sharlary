@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from django.contrib.auth.models import User
 
 if os.environ.get('EMAIL_HOST_USER'):
     from extra_py import private_info_heroku as private_info
@@ -158,3 +159,5 @@ GOOGLE_API_KEY = private_info.GOOGLE_API_KEY
 
 GOOGLE_RECAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify'
 GOOGLE_GEOCODE_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
+
+AUTH_USER_MODEL = User
