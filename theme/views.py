@@ -171,7 +171,10 @@ def user_save_company(request):
 
         company_object = get_object_or_404(Company, id=company_id)
         user_object = get_object_or_404(User, id=request.user.id)
-        user_extend_object = user_object.user_extend
+        try:
+            user_extend_object = user_object.user_extend
+        except UserExtend.DoesNotExist:
+            user_extend_object = UserExtend.objects.create(user=user_object)
 
         if action == "save":
             user_extend_object.company.add(company_object)
@@ -255,9 +258,8 @@ def add_company(request):
             latitude = location['lat']
             longitude = location['lng']
 
-            c = Company(name=name, website=website, country=country, city=city, street=street, category=category,
+            c = Company.objects.create(name=name, website=website, country=country, city=city, street=street, category=category,
                         latitude=latitude, longitude=longitude)
-            c.save()
             ctx['saved'] = True
             ctx['company_id'] = c.id
         else:
@@ -297,14 +299,16 @@ def share_salary(request, company_id):
             major = request.POST["major"]
             other = request.POST["other"]
 
-            s = Salary(email=email, company=company, title=title, monthly_pay=monthly_pay, related_expr=related_expr,
+            s = Salary.objects.create(email=email, company=company, title=title, monthly_pay=monthly_pay, related_expr=related_expr,
                        education=education, school=school, major=major, other=other)
-            s.save()
             company.update_time = s.update_time
             company.save()
             if request.user.is_authenticated():
                 user_object = get_object_or_404(User, id=request.user.id)
-                user_extend_object = user_object.user_extend
+                try:
+                    user_extend_object = user_object.user_extend
+                except UserExtend.DoesNotExist:
+                    user_extend_object = UserExtend.objects.create(user=user_object)
                 user_extend_object.salary.add(s)
                 user_extend_object.save()
 
