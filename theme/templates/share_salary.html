@@ -75,6 +75,11 @@
                     <textarea class="form-control" id="other" rows="3" name="other" placeholder="{% trans '年終，認股，工作內容，上下班時間，心得' %}" maxlength="300"></textarea>
                 </div>
 
+                <div class="form-group">
+                    <div class="g-recaptcha" data-sitekey="6LeXyywUAAAAABRntcFp3gbmfA1GFrcSpT5PDj7T"></div>
+                </div>
+
+
                 <div class="row">
                     <div class="col-8">
                         <button type="submit" class="btn btn-outline-primary btn-block">{% trans "新增" %}</button>
@@ -89,7 +94,11 @@
 {% endblock %}
 
 {% block extraJS %}
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     {% if saved %}
         <script src="{% static 'js/sweet_alert2_form_success.js' %}" title="{% trans '分享成功' %}" redirect_url="{% url 'company_info' company.id %}"></script>
+    {% elif recaptcha_error %}
+    {% get_current_language as LANGUAGE_CODE %}
+        <script src="{% static 'js/sweet_alert2_form_error.js' %}" title="{% trans '分享失敗' %}" lang="{{ LANGUAGE_CODE }}" error_msg="{{ error_msg }}"></script>
     {% endif %}
 {% endblock %}

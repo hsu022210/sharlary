@@ -50,7 +50,7 @@
                         width="100%"
                         height="300vh"
                         frameborder="0" style="border:0"
-                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAVOibQwcgHJDKKM9DnjjvfT9rHSS26PPc&q={{r.country}}{{r.city}}{{r.street}}&zoom=15&language=zh_TW" allowfullscreen>
+                        src="https://www.google.com/maps/embed/v1/place?key={{GGL_API_KEY}}&q={{r.country}}{{r.city}}{{r.street}}&zoom=15&language=zh_TW" allowfullscreen>
                 </iframe>
                 <a href="{% url 'share_salary' r.id %}" class="btn btn-warning btn-block">{% trans "分享薪資" %} <i class="fa fa-plus" aria-hidden="true"></i></i></a>
             </div>

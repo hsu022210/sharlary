@@ -13,6 +13,8 @@ import requests
 from django.core.mail import send_mail
 from django.contrib.auth.views import PasswordChangeView
 from django.db.models import Q
+from sharlary import settings
+from django.core.mail import EmailMultiAlternatives
 # Create your views here.
 
 
@@ -24,6 +26,8 @@ def index(request):
     user_object = None
     saved_companies = None
     all_companies_qs = Company.objects.all()
+
+    ctx['GOOGLE_API_KEY'] = settings.GOOGLE_API_KEY
 
     options_city = all_companies_qs.values_list("city", flat=True).distinct()
     options_category = all_companies_qs.values_list("category", flat=True).distinct()
@@ -144,6 +148,7 @@ def set_lang(request):
 
 def company_info(request, company_id):
     ctx = {}
+    ctx['GGL_API_KEY'] = settings.GOOGLE_API_KEY
     ctx['r'] = get_object_or_404(Company, pk=company_id)
 
     if request.user.is_authenticated():
@@ -187,12 +192,16 @@ def register(request):
             user_extend_object = UserExtend.objects.create(user=user)
             Salary.objects.filter(email=user.email).update(user_extend=user_extend_object)
 
+            subject = '{0} ，歡迎加入Sharlary！'.format(user.first_name)
+            from_email = settings.DEFAULT_FROM_EMAIL
+            text_content = 'Hi {0}！快快分享薪資一起讓就業環境變得更好！\n\n\n The Sharlary Team'.format(user.first_name)
+
             send_mail(
-                '{0} ，歡迎加入Sharlary！'.format(user.first_name),
-                'Hi {0}！快快分享薪資一起讓就業環境變得更好！\n\n\n The Eaggie Team'.format(user.first_name),
-                'hsu022210@gmail.com',
+                subject,
+                text_content,
+                from_email,
                 [user.email],
-                fail_silently=False,
+                fail_silently=False
             )
             return redirect(reverse_lazy('index') + '?redirect_type=register')
     else:
@@ -225,28 +234,34 @@ def user_update(request):
 def add_company(request):
     ctx = {}
     if request.method == "POST":
-        name = request.POST["name"]
-        tmp = Company.objects.get(name=name)
-        if tmp:
-            return redirect('company_info', company_id=tmp.id)
-        website = request.POST["website"]
-        country = request.POST["country"]
-        city = request.POST["city"]
-        street = request.POST["street"]
-        category = request.POST["category"]
+        result = recaptcha_validation(request)
 
-        url = 'https://maps.googleapis.com/maps/api/geocode/json'
-        params = {'sensor': 'false', 'address': country + city + street}
-        response = requests.get(url, params=params)
-        results = response.json()['results']
-        location = results[0]['geometry']['location']
-        latitude = location['lat']
-        longitude = location['lng']
+        if result['success']:
+            name = request.POST["name"]
+            tmp = Company.objects.get(name=name)
+            if tmp:
+                return redirect('company_info', company_id=tmp.id)
+            website = request.POST["website"]
+            country = request.POST["country"]
+            city = request.POST["city"]
+            street = request.POST["street"]
+            category = request.POST["category"]
 
-        c = Company(name=name, website=website, country=country, city=city, street=street, category=category, latitude=latitude, longitude=longitude)
-        c.save()
-        ctx['saved'] = True
-        ctx['company_id'] = c.id
+            params = {'sensor': 'false', 'address': country + city + street}
+            response = requests.get(settings.GOOGLE_GEOCODE_URL, params=params)
+            results = response.json()['results']
+            location = results[0]['geometry']['location']
+            latitude = location['lat']
+            longitude = location['lng']
+
+            c = Company(name=name, website=website, country=country, city=city, street=street, category=category,
+                        latitude=latitude, longitude=longitude)
+            c.save()
+            ctx['saved'] = True
+            ctx['company_id'] = c.id
+        else:
+            ctx['recaptcha_error'] = True
+            ctx['error_msg'] = "Google reCAPTCHA 認證失敗"
     return render(request, 'add_company.html', ctx)
 
 
@@ -265,30 +280,38 @@ def share_salary(request, company_id):
     ctx = {}
     company = get_object_or_404(Company, id=company_id)
     if request.method == "POST":
-        if request.user.is_authenticated():
-            email = request.user.email
+
+        result = recaptcha_validation(request)
+
+        if result['success']:
+            if request.user.is_authenticated():
+                email = request.user.email
+            else:
+                email = request.POST["email"]
+            title = request.POST["title"]
+            monthly_pay = request.POST["monthly_pay"]
+            related_expr = request.POST["related_expr"]
+            education = request.POST["education"]
+            school = request.POST["school"]
+            major = request.POST["major"]
+            other = request.POST["other"]
+
+            s = Salary(email=email, company=company, title=title, monthly_pay=monthly_pay, related_expr=related_expr,
+                       education=education, school=school, major=major, other=other)
+            s.save()
+            company.update_time = s.update_time
+            company.save()
+            if request.user.is_authenticated():
+                user_object = get_object_or_404(User, id=request.user.id)
+                user_extend_object = user_object.user_extend
+                user_extend_object.salary.add(s)
+                user_extend_object.save()
+
+            ctx['saved'] = True
         else:
-            email = request.POST["email"]
-        title = request.POST["title"]
-        monthly_pay = request.POST["monthly_pay"]
-        related_expr = request.POST["related_expr"]
-        education = request.POST["education"]
-        school = request.POST["school"]
-        major = request.POST["major"]
-        other = request.POST["other"]
+            ctx['recaptcha_error'] = True
+            ctx['error_msg'] = "Google reCAPTCHA 認證失敗"
 
-        s = Salary(email=email, company=company, title=title, monthly_pay=monthly_pay, related_expr=related_expr,
-                   education=education, school=school, major=major, other=other)
-        s.save()
-        company.update_time = s.update_time
-        company.save()
-        if request.user.is_authenticated():
-            user_object = get_object_or_404(User, id=request.user.id)
-            user_extend_object = user_object.user_extend
-            user_extend_object.salary.add(s)
-            user_extend_object.save()
-
-        ctx['saved'] = True
     ctx['company'] = company
     ctx['education_options'] = ["國小", "國中", "高中", "高職", "公立大學", "私立大學", "海外大學",
                                 "公立碩士", "私立碩士", "海外碩士", "公立博士", "私立博士", "海外博士"]
@@ -339,3 +362,14 @@ def user_salary_update(request, salary_id):
         form = SalaryForm(instance=salary_object)
     ctx['form'] = form
     return render(request, 'user_salary_update.html', ctx)
+
+
+def recaptcha_validation(request):
+    recaptcha_response = request.POST.get('g-recaptcha-response')
+    data = {
+        'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+        'response': recaptcha_response
+    }
+    r = requests.post(settings.GOOGLE_RECAPTCHA_URL, data=data)
+    result = r.json()
+    return result

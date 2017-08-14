@@ -15,7 +15,7 @@
                     <!--<label for="name">公司名稱*</label>-->
                     <!--<input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="{{company.name}}" name="name" maxlength="50" required>-->
                     <h5 class="form-control-static text-center">
-                        任職公司: <a href="{% url 'company_info' salary.company.id %}" class="text-primary">{{salary.company.name}}</a>
+                        {% trans "任職公司" %}: <a href="{% url 'company_info' salary.company.id %}" class="text-primary">{{salary.company.name}}</a>
                         <br>
                         <br>
                         <p class="text-muted"><small>{{salary.company.country}}{{salary.company.city}}{{salary.company.street}}</small></p>
@@ -23,12 +23,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="title">職稱*</label>
-                    <input type="text" class="form-control" id="title" placeholder="ex: 業務助理" name="title" value="{{salary.title}}" required>
+                    <label for="title">{% trans "職稱" %}*</label>
+                    <input type="text" class="form-control" id="title" placeholder="ex: {% trans '業務助理' %}" name="title" value="{{salary.title}}" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="monthly_pay">月薪*</label>
+                    <label for="monthly_pay">{% trans "月薪" %}*</label>
                     <div class="input-group">
                         <span class="input-group-addon">$</span>
                         <input type="number" class="form-control" id="monthly_pay" placeholder="ex: 50000" name="monthly_pay" value="{{salary.monthly_pay}}" required>
@@ -36,12 +36,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="related_expr">相關工作經驗年資*</label>
+                    <label for="related_expr">{% trans "相關工作經驗年資" %}*</label>
                     <input type="number" class="form-control" id="related_expr" placeholder="ex: 3" name="related_expr" value="{{salary.related_expr}}" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="education">教育程度*</label>
+                    <label for="education">{% trans "教育程度" %}*</label>
                     <select class="form-control custom-select" id="education" name="education" required>
                         {% for op in education_options %}
                             {% if op == salary.education %}
@@ -60,31 +60,31 @@
                         <input type="email" id="email" class="form-control" value="{{salary.email}}" name="email" required>
                     </fieldset>
                     {% else %}
-                    <input type="email" id="email" class="form-control" placeholder="Email address (用於日後修改薪資)" name="email" required>
+                    <input type="email" id="email" class="form-control" placeholder="Email address ({% trans '用於日後修改薪資' %})" name="email" required>
                     {% endif %}
                 </div>
 
                 <div class="form-group">
-                    <label for="school">學校</label>
-                    <input type="text" class="form-control" id="school" placeholder="ex: 東吳大學" name="school" value="{{salary.school}}">
+                    <label for="school">{% trans "學校" %}</label>
+                    <input type="text" class="form-control" id="school" placeholder="ex: {% trans '東吳大學' %}" name="school" value="{{salary.school}}">
                 </div>
 
                 <div class="form-group">
-                    <label for="major">科系</label>
-                    <input type="text" class="form-control" id="major" placeholder="ex: 法律系" name="major" value="{{salary.major}}">
+                    <label for="major">{% trans "科系" %}</label>
+                    <input type="text" class="form-control" id="major" placeholder="ex: {% trans '法律系' %}" name="major" value="{{salary.major}}">
                 </div>
 
                 <div class="form-group">
-                    <label for="other">其他 (300字以內)</label>
-                    <textarea class="form-control" id="other" rows="3" name="other" placeholder="年終，認股，工作內容，上下班時間，心得" maxlength="300">{{salary.other}}</textarea>
+                    <label for="other">{% trans "其他" %} ({% trans "300字以內" %})</label>
+                    <textarea class="form-control" id="other" rows="3" name="other" placeholder="{% trans '年終，認股，工作內容，上下班時間，心得' %}" maxlength="300">{{salary.other}}</textarea>
                 </div>
 
                 <div class="row">
                     <div class="col-8">
-                        <button type="submit" class="btn btn-outline-primary btn-block">更改</button>
+                        <button type="submit" class="btn btn-outline-primary btn-block">{% trans "更改" %}</button>
                     </div>
                     <div class="col-4">
-                        <a href="{% url 'user_salary' %}" class="btn btn-outline-danger btn-block">取消</a>
+                        <a href="{% url 'user_salary' %}" class="btn btn-outline-danger btn-block">{% trans "取消" %}</a>
                     </div>
                 </div>
             </form>

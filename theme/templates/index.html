@@ -160,6 +160,9 @@
 {% endblock %}
 
 {% block extraJS %}
+        <!--google map api-->
+    <script src="https://maps.google.com/maps/api/js?language=zh_TW&key={{GOOGLE_API_KEY}}" type="text/javascript"></script>
+
     <script src="{% static 'js/google_map_multiple_marker.js' %}" restaurants_locations_dict="{{ restaurants_locations_dict }}" ggl_map_zoom_value="{{ ggl_map_zoom_value|safe }}" ggl_map_center_lat_lng_arr="{{ ggl_map_center_lat_lng_arr|safe }}" marker_url="/company_info/"></script>
         {% if first_login %}
             <script src="{% static 'js/sweet_alert2_form_success.js' %}" title="{% trans '登入成功' %}！" redirect_url="{% url 'index' %}"></script>

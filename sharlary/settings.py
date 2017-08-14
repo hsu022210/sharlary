@@ -13,9 +13,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 if os.environ.get('EMAIL_HOST_USER'):
-    from extra_py import email_info_heroku as email_info
+    from extra_py import private_info_heroku as private_info
 else:
-    from extra_py import email_info
+    from extra_py import private_info
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -141,10 +141,16 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-DEFAULT_FROM_EMAIL = email_info.DEFAULT_FROM_EMAIL
-SERVER_EMAIL = email_info.SERVER_EMAIL
-EMAIL_HOST_USER = email_info.EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = email_info.EMAIL_HOST_PASSWORD
+DEFAULT_FROM_EMAIL = private_info.DEFAULT_FROM_EMAIL
+SERVER_EMAIL = private_info.SERVER_EMAIL
+EMAIL_HOST_USER = private_info.EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = private_info.EMAIL_HOST_PASSWORD
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 # SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+
+GOOGLE_RECAPTCHA_SECRET_KEY = private_info.GOOGLE_RECAPTCHA_SECRET_KEY
+GOOGLE_API_KEY = private_info.GOOGLE_API_KEY
+
+GOOGLE_RECAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify'
+GOOGLE_GEOCODE_URL = 'https://maps.googleapis.com/maps/api/geocode/json'
