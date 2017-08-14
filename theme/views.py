@@ -184,10 +184,8 @@ def register(request):
             user.first_name = request.POST["first_name"].capitalize()
             user.last_name = request.POST["last_name"].capitalize()
             user.save()
-            user_extend_object = UserExtend(user=user)
-            for salary in Salary.objects.filter(email=user.email):
-                user_extend_object.salary.add(salary)
-            user_extend_object.save()
+            user_extend_object = UserExtend.objects.create(user=user)
+            Salary.objects.filter(email=user.email).update(user_extend=user_extend_object)
 
             send_mail(
                 '{0} ，歡迎加入Sharlary！'.format(user.first_name),

@@ -40,12 +40,4 @@
 {% endblock %}
 
 {% block extraJS %}
-    {% if form.errors %}
-        {{ form.errors }}
-        {% get_current_language as LANGUAGE_CODE %}
-        <script src="{% static 'js/sweet_alert2_form_error.js' %}" title="{% trans '表格有誤' %}" lang="{{ LANGUAGE_CODE }}"></script>
-    {% elif saved %}
-        <script src="{% static 'js/sweet_alert2_form_success.js' %}" title="{% trans '新增成功' %}" redirect_url="{% url 'share_salary' company_id %}"></script>
-    {% endif %}
-    <script src="{% static 'js/auto_complete.js' %}" id_name="company_name" source="{{ company_names }}"></script>
 {% endblock %}

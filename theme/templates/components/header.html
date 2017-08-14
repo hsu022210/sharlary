@@ -52,7 +52,7 @@
         <div class="btn-group">
           <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {% get_current_language as LANGUAGE_CODE %}
-              {{ LANGUAGE_CODE }}
+              {{ LANGUAGE_CODE|language_name_translated }}
           </button>
           <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="{% url 'set_lang' %}?type=en-US&next={{ request.path }}">English</a>

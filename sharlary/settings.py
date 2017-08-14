@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'sharlary.urls'
@@ -144,3 +145,6 @@ DEFAULT_FROM_EMAIL = email_info.DEFAULT_FROM_EMAIL
 SERVER_EMAIL = email_info.SERVER_EMAIL
 EMAIL_HOST_USER = email_info.EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = email_info.EMAIL_HOST_PASSWORD
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+# SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
