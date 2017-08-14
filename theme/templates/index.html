@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load static %}
+{% load tz %}
 
 {% block body %}
 
@@ -105,7 +106,7 @@
 
                     <a href="{% url 'company_info' c.id %}" style="text-decoration:inherit; color:inherit;">
                       <div class="card-block text-center">
-                          <p class="card-text text-right"><small class="text-muted">{{ c.update_time|date:"Y/m/d"}}</small></p>
+                          <p class="card-text text-right"><small class="text-muted">{{ c.update_time|timezone:local_tz|date:"Y/m/d"}}</small></p>
                           <h4 class="card-title">{{ c.name }}</h4>
                           <br>
                           <p class="card-text">{{c.country}}{{c.city}}{{c.street}}</p>

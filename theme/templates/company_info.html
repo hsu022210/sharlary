@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load static %}
+{% load tz %}
 
 {% block body %}
 
@@ -68,7 +69,7 @@
                               <h6 class="mb-0">
                                   <i class="fa fa-caret-down" aria-hidden="true"></i>&nbsp;
                                   {{salary.title}} ${{salary.monthly_pay}}
-                                <p class="card-text pull-right"><small>{{salary.update_time|date:"Y/m/d"}}</small></p>
+                                <p class="card-text pull-right"><small>{{salary.update_time|timezone:local_tz|date:"Y/m/d"}}</small></p>
                               </h6>
                             </a>
                         </div>

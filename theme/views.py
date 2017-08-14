@@ -129,6 +129,7 @@ def index(request):
 
     ctx['ggl_map_center_lat_lng_arr'] = ggl_map_center_lat_lng_arr
     ctx['ggl_map_zoom_value'] = ggl_map_zoom_value
+    ctx['local_tz'] = "Asia/Taipei"
     return render(request, 'index.html', ctx)
 
 
@@ -157,6 +158,7 @@ def company_info(request, company_id):
                 ctx['user_saved'] = True
         except UserExtend.DoesNotExist:
             pass
+    ctx['local_tz'] = "Asia/Taipei"
     return render(request, 'company_info.html', ctx)
 
 
