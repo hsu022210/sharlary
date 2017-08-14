@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from theme.views import *
 from django.contrib.auth.views import login, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -40,3 +41,5 @@ urlpatterns = [
     url(r'^user_salary/$', user_salary, name='user_salary'),
     url(r'^user_salary_update/(?P<salary_id>[0-9]+)$', user_salary_update, name='user_salary_update'),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
