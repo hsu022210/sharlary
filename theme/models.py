@@ -23,7 +23,7 @@ class Company(models.Model):
 
 class ProfileForm(ModelForm):
     class Meta:
-        # model = User
+        model = User
         fields = ['first_name', 'last_name', 'username']
 
 
