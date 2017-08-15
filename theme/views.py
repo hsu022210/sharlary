@@ -234,7 +234,10 @@ def add_company(request):
 
         if result['success']:
             name = request.POST["name"]
-            tmp = Company.objects.get(name=name)
+            try:
+                tmp = Company.objects.get(name=name)
+            except Company.DoesNotExist:
+                tmp = None
             if tmp:
                 return redirect('company_info', company_id=tmp.id)
             website = request.POST["website"]
@@ -246,14 +249,19 @@ def add_company(request):
             params = {'sensor': 'false', 'address': country + city + street}
             response = requests.get(settings.GOOGLE_GEOCODE_URL, params=params)
             results = response.json()['results']
-            location = results[0]['geometry']['location']
-            latitude = location['lat']
-            longitude = location['lng']
+            if len(results) == 1:
+                location = results[0]['geometry']['location']
+                latitude = location['lat']
+                longitude = location['lng']
 
-            c = Company.objects.create(name=name, website=website, country=country, city=city, street=street, category=category,
-                        latitude=latitude, longitude=longitude)
-            ctx['saved'] = True
-            ctx['company_id'] = c.id
+                c = Company.objects.create(name=name, website=website, country=country, city=city, street=street,
+                                           category=category,
+                                           latitude=latitude, longitude=longitude)
+                ctx['saved'] = True
+                ctx['company_id'] = c.id
+            else:
+                ctx['address_error'] = True
+                ctx['error_msg'] = "請輸入詳細且正確的地址"
         else:
             ctx['recaptcha_error'] = True
             ctx['error_msg'] = "Google reCAPTCHA 認證失敗"

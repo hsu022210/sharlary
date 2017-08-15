@@ -108,5 +108,8 @@
     {% elif recaptcha_error %}
         {% get_current_language as LANGUAGE_CODE %}
         <script src="{% static 'js/sweet_alert2_form_error.js' %}" title="{% trans '新增失敗' %}" lang="{{ LANGUAGE_CODE }}" error_msg="{{ error_msg }}"></script>
+    {% elif address_error %}
+    {% get_current_language as LANGUAGE_CODE %}
+    <script src="{% static 'js/sweet_alert2_form_error.js' %}" title="{% trans '新增失敗' %}" lang="{{ LANGUAGE_CODE }}" error_msg="{{ error_msg }}"></script>
     {% endif %}
 {% endblock %}
