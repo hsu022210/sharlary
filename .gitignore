@@ -6,3 +6,4 @@ extra_py/private_info.py
 sharlary_venv/
 __pycache__
 private_info.py
+theme/migrations/00*
