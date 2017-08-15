@@ -154,6 +154,7 @@ SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 # SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
 GOOGLE_RECAPTCHA_SECRET_KEY = private_info.GOOGLE_RECAPTCHA_SECRET_KEY
+GOOGLE_RECAPTCHA_SITE_KEY = private_info.GOOGLE_RECAPTCHA_SITE_KEY
 GOOGLE_API_KEY = private_info.GOOGLE_API_KEY
 
 GOOGLE_RECAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify'

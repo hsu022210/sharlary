@@ -36,11 +36,8 @@ def index(request):
 
     if request.user.is_authenticated():
         user_object = get_object_or_404(User, id=request.user.id)
-        try:
-            user_extend_object = user_object.user_extend
-            saved_companies = user_extend_object.company.all()
-        except UserExtend.DoesNotExist:
-            pass
+        user_extend_object = user_object.user_extend
+        saved_companies = user_extend_object.company.all()
 
     ctx['saved_companies'] = saved_companies
 
@@ -152,11 +149,8 @@ def company_info(request, company_id):
     ctx['r'] = get_object_or_404(Company, pk=company_id)
 
     if request.user.is_authenticated():
-        try:
-            if get_object_or_404(User, id=request.user.id).user_extend.company.filter(id=company_id):
-                ctx['user_saved'] = True
-        except UserExtend.DoesNotExist:
-            pass
+        if get_object_or_404(User, id=request.user.id).user_extend.company.filter(id=company_id):
+            ctx['user_saved'] = True
     ctx['local_tz'] = "Asia/Taipei"
     return render(request, 'company_info.html', ctx)
 
@@ -171,10 +165,7 @@ def user_save_company(request):
 
         company_object = get_object_or_404(Company, id=company_id)
         user_object = get_object_or_404(User, id=request.user.id)
-        try:
-            user_extend_object = user_object.user_extend
-        except UserExtend.DoesNotExist:
-            user_extend_object = UserExtend.objects.create(user=user_object)
+        user_extend_object = user_object.user_extend
 
         if action == "save":
             user_extend_object.company.add(company_object)
@@ -237,6 +228,7 @@ def user_update(request):
 
 def add_company(request):
     ctx = {}
+    ctx['GOOGLE_RECAPTCHA_SITE_KEY'] = settings.GOOGLE_RECAPTCHA_SITE_KEY
     if request.method == "POST":
         result = recaptcha_validation(request)
 
@@ -282,6 +274,7 @@ class MyPasswordChangeView(PasswordChangeView):
 def share_salary(request, company_id):
     ctx = {}
     company = get_object_or_404(Company, id=company_id)
+    ctx['GOOGLE_RECAPTCHA_SITE_KEY'] = settings.GOOGLE_RECAPTCHA_SITE_KEY
     if request.method == "POST":
 
         result = recaptcha_validation(request)
@@ -305,10 +298,7 @@ def share_salary(request, company_id):
             company.save()
             if request.user.is_authenticated():
                 user_object = get_object_or_404(User, id=request.user.id)
-                try:
-                    user_extend_object = user_object.user_extend
-                except UserExtend.DoesNotExist:
-                    user_extend_object = UserExtend.objects.create(user=user_object)
+                user_extend_object = user_object.user_extend
                 user_extend_object.salary.add(s)
                 user_extend_object.save()
 
