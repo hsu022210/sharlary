@@ -376,3 +376,16 @@ def recaptcha_validation(request):
     r = requests.post(settings.GOOGLE_RECAPTCHA_URL, data=data)
     result = r.json()
     return result
+
+
+@login_required()
+@require_POST
+def comment_save(request, salary_id):
+    salary_object = get_object_or_404(Salary, id=salary_id)
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save()
+        comment.salary = salary_object
+        comment.user_extend = request.user.user_extend
+        comment.save()
+    return redirect('company_info', company_id=salary_object.company.id)

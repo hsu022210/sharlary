@@ -49,10 +49,27 @@ class Salary(models.Model):
     other = models.TextField(max_length=300, null=True, blank=True)
 
     def __str__(self):
-        return self.email + " " + str(self.monthly_pay)
+        return self.email + " " + str(self.company) + " " + str(self.monthly_pay)
 
 
 class SalaryForm(ModelForm):
     class Meta:
         model = Salary
         fields = ['title', 'monthly_pay', 'related_expr', 'education', 'school', 'major', 'other']
+
+
+class Comment(models.Model):
+    salary = models.ForeignKey(Salary, on_delete=models.CASCADE, related_name='comment', null=True)
+    user_extend = models.ForeignKey(UserExtend, on_delete=models.CASCADE, related_name='comment', null=True)
+    message = models.TextField(max_length=300)
+    created_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.message
+
+
+class CommentForm(ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ['message']

@@ -45,3 +45,9 @@ class UserExtendAdmin(admin.ModelAdmin):
     inlines = (SalaryInline,)
 
 admin.site.register(UserExtend, UserExtendAdmin)
+
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('salary', 'user_extend', 'message', 'created_time')
+
+admin.site.register(Comment, CommentAdmin)

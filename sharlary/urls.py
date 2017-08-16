@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^share_salary/(?P<company_id>[0-9]+)$', share_salary, name='share_salary'),
     url(r'^user_salary/$', user_salary, name='user_salary'),
     url(r'^user_salary_update/(?P<salary_id>[0-9]+)$', user_salary_update, name='user_salary_update'),
+    url(r'^comment_save/(?P<salary_id>[0-9]+)$', comment_save, name='comment_save'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
