@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-14 07:34+0000\n"
+"POT-Creation-Date: 2017-08-16 17:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,18 +17,44 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: theme/templates/add_company.html:89
+#: theme/templates/add_company.html:117
 msgid "新增成功"
 msgstr "Successfully added"
 
-#: theme/templates/company_info.html:41
+#: theme/templates/add_company.html:120 theme/templates/add_company.html:123
+msgid "新增失敗"
+msgstr "Add failed"
+
+#: theme/templates/company_info.html:18 theme/templates/index.html:130
+msgid "薪資數據件數"
+msgstr "Salary data"
+
+#: theme/templates/company_info.html:42
 msgid "公司官網"
 msgstr "Official website"
 
-#: theme/templates/company_info.html:55 theme/templates/index.html:23
+#: theme/templates/company_info.html:56 theme/templates/index.html:24
 #: theme/templates/share_salary.html:10 theme/templates/user_salary.html:35
 msgid "分享薪資"
 msgstr "Share salary"
+
+#: theme/templates/company_info.html:84 theme/templates/share_salary.html:39
+#: theme/templates/user_salary_update.html:39
+msgid "相關工作經驗年資"
+msgstr "Related working experience"
+
+#: theme/templates/company_info.html:85 theme/templates/share_salary.html:44
+#: theme/templates/user_salary_update.html:44
+msgid "教育程度"
+msgstr "Education level"
+
+#: theme/templates/company_info.html:87
+msgid "學校科系"
+msgstr "School & major"
+
+#: theme/templates/company_info.html:99
+msgid "前"
+msgstr " ago"
 
 #: theme/templates/components/footer.html:9
 msgid "聯絡我們"
@@ -108,74 +134,70 @@ msgstr "Thank you for joining Sharlary!"
 msgid "重設密碼驗證信"
 msgstr "Reset password letter"
 
-#: theme/templates/index.html:11
+#: theme/templates/index.html:12
 msgid "收藏清單"
 msgstr "Saved list"
 
-#: theme/templates/index.html:13 theme/templates/registration/login.html:16
+#: theme/templates/index.html:14 theme/templates/registration/login.html:16
 #: theme/templates/registration/register.html:16
 #: theme/templates/user_salary.html:36
 msgid "回首頁"
 msgstr "Back to home"
 
-#: theme/templates/index.html:17
+#: theme/templates/index.html:18
 msgid "匿名分享薪資，一覽企業待遇"
 msgstr "Share your salary, make the pays in industries public."
 
-#: theme/templates/index.html:21
+#: theme/templates/index.html:22
 msgid "加入會員"
 msgstr "Sign up"
 
-#: theme/templates/index.html:50 theme/templates/index.html:91
+#: theme/templates/index.html:51 theme/templates/index.html:92
 msgid "收藏清單裡搜尋"
 msgstr "Search in saved list"
 
-#: theme/templates/index.html:52 theme/templates/index.html:93
+#: theme/templates/index.html:53 theme/templates/index.html:94
 #: theme/templates/search_company.html:32
 msgid "搜尋"
 msgstr "Search"
 
-#: theme/templates/index.html:65
+#: theme/templates/index.html:66
 msgid "城市"
 msgstr "City"
 
-#: theme/templates/index.html:71
+#: theme/templates/index.html:72
 msgid "產業"
 msgstr "Type"
 
-#: theme/templates/index.html:85
+#: theme/templates/index.html:86
 msgid "公司名稱 / 職位名稱"
-msgstr "Company name / title"
+msgstr "Company / title"
 
-#: theme/templates/index.html:117
-msgid "薪資數據件數"
-msgstr "Salary data"
-
-#: theme/templates/index.html:147 theme/templates/search_company.html:52
+#: theme/templates/index.html:160 theme/templates/search_company.html:52
 msgid "無公司符合搜尋結果"
 msgstr "No company match the search."
 
-#: theme/templates/index.html:150
+#: theme/templates/index.html:163
 msgid "還沒收藏任何公司哦"
-msgstr "You haven't saved any companu."
+msgstr "You haven't saved any company."
 
-#: theme/templates/index.html:152
+#: theme/templates/index.html:165
 msgid "尚無公司加入Sharlary"
 msgstr "Coming soon"
 
-#: theme/templates/index.html:165
+#: theme/templates/index.html:181
 msgid "登入成功"
 msgstr "Logged in"
 
-#: theme/templates/index.html:167
+#: theme/templates/index.html:183
 msgid "已登出"
 msgstr "Logged out"
 
-#: theme/templates/index.html:169
+#: theme/templates/index.html:185
 msgid "註冊成功並登入"
 msgstr "Signed up and logged in"
 
-#: theme/templates/index.html:171 theme/templates/user_salary_update.html:101
+#: theme/templates/index.html:187 theme/templates/user_salary_update.html:101
 msgid "更改成功"
 msgstr "Successfully update"
 
@@ -251,7 +273,8 @@ msgstr "Submit"
 #: theme/templates/registration/user_password_reset.html:32
 #: theme/templates/registration/user_password_reset_confirm.html:38
 #: theme/templates/registration/user_update.html:40
-#: theme/templates/share_salary.html:83
+#: theme/templates/share_salary.html:88
+#: theme/templates/user_salary_update.html:87
 msgid "取消"
 msgstr "Cancel"
 
@@ -310,6 +333,7 @@ msgstr ""
 "address that you signed up with, and check your spam folder."
 
 #: theme/templates/registration/user_update.html:37
+#: theme/templates/user_salary_update.html:84
 msgid "更改"
 msgstr "Update"
 
@@ -326,68 +350,76 @@ msgid "新增公司"
 msgstr "Add company"
 
 #: theme/templates/share_salary.html:18
+#: theme/templates/user_salary_update.html:18
 msgid "任職公司"
 msgstr "Working company"
 
 #: theme/templates/share_salary.html:26
+#: theme/templates/user_salary_update.html:26
 msgid "職稱"
 msgstr "Title"
 
 #: theme/templates/share_salary.html:27
+#: theme/templates/user_salary_update.html:27
 msgid "業務助理"
 msgstr "Sales associate"
 
 #: theme/templates/share_salary.html:31
+#: theme/templates/user_salary_update.html:31
 msgid "月薪"
 msgstr "Monthly salary"
 
-#: theme/templates/share_salary.html:39
-msgid "相關工作經驗年資"
-msgstr "Related working experience"
-
-#: theme/templates/share_salary.html:44
-msgid "教育程度"
-msgstr "Education level"
-
 #: theme/templates/share_salary.html:59
+#: theme/templates/user_salary_update.html:63
 msgid "用於日後修改薪資"
 msgstr "for editing information afterwards"
 
 #: theme/templates/share_salary.html:64
+#: theme/templates/user_salary_update.html:68
 msgid "學校"
 msgstr "School"
 
 #: theme/templates/share_salary.html:65
+#: theme/templates/user_salary_update.html:69
 msgid "東吳大學"
 msgstr "University of Chicago"
 
 #: theme/templates/share_salary.html:69
+#: theme/templates/user_salary_update.html:73
 msgid "科系"
 msgstr "Major"
 
 #: theme/templates/share_salary.html:70
+#: theme/templates/user_salary_update.html:74
 msgid "法律系"
 msgstr "Law"
 
 #: theme/templates/share_salary.html:74
+#: theme/templates/user_salary_update.html:78
 msgid "其他"
 msgstr "Other"
 
 #: theme/templates/share_salary.html:74
+#: theme/templates/user_salary_update.html:78
 msgid "300字以內"
 msgstr "300 words maximum"
 
 #: theme/templates/share_salary.html:75
+#: theme/templates/user_salary_update.html:79
 msgid "年終，認股，工作內容，上下班時間，心得"
 msgstr "Bonus, stock, job description, working time"
 
-#: theme/templates/share_salary.html:80
+#: theme/templates/share_salary.html:85
 msgid "新增"
 msgstr "Add"
 
-#: theme/templates/share_salary.html:93
+#: theme/templates/share_salary.html:99
 msgid "分享成功"
 msgstr "Successfully shared"
+
+#: theme/templates/share_salary.html:102
+msgid "分享失敗"
+msgstr "Share failed"
 
 #: theme/templates/user_salary_update.html:10
 msgid "更改薪資"

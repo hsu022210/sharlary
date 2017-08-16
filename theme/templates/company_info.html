@@ -81,7 +81,7 @@
                         </div>
                         <div id="collapse{{salary.id}}" class="collapse" role="tabpanel" aria-labelledby="heading{{salary.id}}">
                           <div class="card-block text-white">
-                              <p>{% trans '相關工作經驗' %}: {{salary.related_expr}}年</p>
+                              <p>{% trans '相關工作經驗年資' %}: {{salary.related_expr}}年</p>
                               <p>{% trans '教育程度' %}: {{salary.education}}</p>
                               {% if salary.school or salary.major %}
                                 <p>{% trans '學校科系' %}: {{salary.school}} {{salary.major}}</p>

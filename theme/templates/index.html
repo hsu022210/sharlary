@@ -61,7 +61,7 @@
                         <br>
                         <br>
 
-                        <div class="col-6 col-sm-5">
+                        <div class="col-7 col-sm-5">
                             <select class="custom-select" name="city" form="search_form">
                               <option selected>{% trans "城市" %}</option>
                               {% for op in options_city %}
@@ -75,7 +75,7 @@
                               {% endfor %}
                           </select>
                         </div>
-                        <div class="col-6 col-sm-7">
+                        <div class="col-5 col-sm-7">
                           {% if user_saved_list %}
                             <form action="{% url 'index' %}?redirect_type=user_saved_list" method="post" id="search_form">{% csrf_token %}
                           {% else %}
