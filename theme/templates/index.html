@@ -105,19 +105,28 @@
                 <div class="card card-custom">
 
                     <a href="{% url 'company_info' c.id %}" style="text-decoration:inherit; color:inherit;">
-                      <div class="card-block text-center">
+
+                        <div class="card-block text-center">
                           <p class="card-text text-right"><small class="text-muted">{{ c.update_time|timezone:local_tz|date:"Y/m/d"}}</small></p>
                           <h4 class="card-title">{{ c.name }}</h4>
                           <br>
                           <p class="card-text">{{c.country}}{{c.city}}{{c.street}}</p>
                       </div>
+
                       <ul class="list-group list-group-flush">
+
                           {% for s in c.salary.all|dictsortreversed:"update_time"|slice:":3" %}
                           <li class="list-group-item justify-content-between">
                               <span class="text-primary">{{ s.title }}: ${{ s.monthly_pay }}</span>
-                              <span><p class="card-text">{{ s.update_time|timezone:local_tz|date:"Y/m/d" }}</p></span>
+                              <span class="card-text">{% if s.comment.count > 0 %}
+                                    <i class="fa fa-comment-o" aria-hidden="true"></i> {{s.comment.count}}
+                                    {% endif %}</span>
+                              <span class="card-text">
+                                    {{ s.update_time|timezone:local_tz|date:"Y/m/d" }}
+                              </span>
                           </li>
                           {% endfor %}
+
                           <li class="list-group-item justify-content-between"><span><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;{% trans "薪資數據件數" %}: {{c.salary.count}}</span>
                               <span><i class="fa fa-caret-down fa-lg" aria-hidden="true"></i> more</span>
                           </li>

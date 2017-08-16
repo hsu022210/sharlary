@@ -71,7 +71,7 @@
                                   {{salary.title}} ${{salary.monthly_pay}}
                                 <p class="card-text pull-right">
                                     {% if salary.comment.count > 0 %}
-                                    <span class="text-white"><i class="fa fa-comment-o" aria-hidden="true"></i> {{salary.comment.count}}</span>
+                                    <i class="fa fa-comment-o" aria-hidden="true"></i> {{salary.comment.count}}
                                     &nbsp;
                                     {% endif %}
                                     <small>{{salary.update_time|timezone:local_tz|date:"Y/m/d"}}</small>
