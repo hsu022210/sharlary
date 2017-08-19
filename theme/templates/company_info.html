@@ -46,9 +46,10 @@
                             {% endif %}
                         </div>
                         <!-- Your send button code -->
-                        <div class="fb-send col-2 offset-1"
-                             data-href="https://google.com"
-                             data-layout="button_count">
+                        <div class="fb-share-button col-2 offset-1"
+                             data-href="{{request.build_absolute_uri}}"
+                             data-layout="button"
+                             data-mobile_iframe="true">
                         </div>
                         <div class="line-it-button col-2" style="display: none;" data-type="share-c" data-lang="zh-Hant"></div>
                         <script src="//scdn.line-apps.com/n/line_it/thirdparty/loader.min.js" async="async" defer="defer"></script>
