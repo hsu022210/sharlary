@@ -37,11 +37,25 @@
                         </span>
                     </li>
                   </ul>
-                    {% if r.website %}
-                    <div class="card-block text-primary">
-                        <a href="{{r.website}}" class="card-link">{% trans "公司官網" %}</a>
+
+                    <div class="card-block text-primary row justify-content-between">
+                         {% if r.website %}
+                        <div class="col-6">
+                            <a href="{{r.website}}" class="card-link">{% trans "公司官網" %}</a>
+                        </div>
+                        {% endif %}
+                        <div class="col-6">
+                            <!-- Your send button code -->
+                              <div class="fb-send"
+                                   data-href="{{ request.build_absolute_uri }}"
+                                   data-layout="button_count"
+                              >
+                              </div>
+                            <div class="line-it-button" style="display: none;" data-type="share-c" data-lang="zh-Hant"></div>
+
+                        </div>
                     </div>
-                    {% endif %}
+
                 </div>
 
             </div>
@@ -132,4 +146,10 @@
 
 {% block extraJS %}
     <script src="{% static 'js/user_save_restaurant.js' %}" ajax_url="{% url 'user_save_company' %}" csrf_token="{{ csrf_token }}"></script>
+
+    <script src="//scdn.line-apps.com/n/line_it/thirdparty/loader.min.js" async="async"　defer="defer"></script>
+
+    <script type="text/javascript">
+      LineIt.loadButton();
+    </script>
 {% endblock %}
