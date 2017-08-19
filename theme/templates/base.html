@@ -36,6 +36,9 @@
       <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
       <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
+    {% block head %}
+    {% endblock %}
+
   </head>
 
   <body>
@@ -45,6 +48,7 @@
     window.fbAsyncInit = function() {
       FB.init({
         appId      : '1426643654087816',
+        autoLogAppEvents : true,
         xfbml      : true,
         version    : 'v2.10'
       });
