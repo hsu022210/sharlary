@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-16 17:37+0000\n"
+"POT-Creation-Date: 2017-08-19 14:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,30 +29,30 @@ msgstr "Add failed"
 msgid "薪資數據件數"
 msgstr "Salary data"
 
-#: theme/templates/company_info.html:42
+#: theme/templates/company_info.html:45
 msgid "公司官網"
 msgstr "Official website"
 
-#: theme/templates/company_info.html:56 theme/templates/index.html:24
+#: theme/templates/company_info.html:70 theme/templates/index.html:24
 #: theme/templates/share_salary.html:10 theme/templates/user_salary.html:35
 msgid "分享薪資"
 msgstr "Share salary"
 
-#: theme/templates/company_info.html:84 theme/templates/share_salary.html:39
+#: theme/templates/company_info.html:98 theme/templates/share_salary.html:39
 #: theme/templates/user_salary_update.html:39
 msgid "相關工作經驗年資"
 msgstr "Related working experience"
 
-#: theme/templates/company_info.html:85 theme/templates/share_salary.html:44
+#: theme/templates/company_info.html:99 theme/templates/share_salary.html:44
 #: theme/templates/user_salary_update.html:44
 msgid "教育程度"
 msgstr "Education level"
 
-#: theme/templates/company_info.html:87
+#: theme/templates/company_info.html:101
 msgid "學校科系"
 msgstr "School & major"
 
-#: theme/templates/company_info.html:99
+#: theme/templates/company_info.html:113
 msgid "前"
 msgstr " ago"
 
@@ -171,11 +171,11 @@ msgstr "Type"
 
 #: theme/templates/index.html:86
 msgid "公司名稱 / 職位名稱"
-msgstr "Company / title"
+msgstr "Company / Title"
 
-#: theme/templates/index.html:160 theme/templates/search_company.html:52
-msgid "無公司符合搜尋結果"
-msgstr "No company match the search."
+#: theme/templates/index.html:160
+msgid "無公司/職位符合搜尋結果"
+msgstr "No company or title match the search."
 
 #: theme/templates/index.html:163
 msgid "還沒收藏任何公司哦"
@@ -344,6 +344,12 @@ msgstr "Search company"
 #: theme/templates/search_company.html:19
 msgid "公司名稱, ex: 台積電"
 msgstr "Company name, ex: Tesla"
+
+#: theme/templates/search_company.html:52
+#, fuzzy
+#| msgid "無公司/職位符合搜尋結果"
+msgid "無公司符合搜尋結果"
+msgstr "No company or title match the search."
 
 #: theme/templates/search_company.html:58
 msgid "新增公司"
