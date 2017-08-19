@@ -26,7 +26,7 @@
     <meta content="http://www.sharlary.ga" property="og:url" />
     <meta content="Sharlary薪資分享平台" property="og:site_name" />
 
-    <title>Sharlary - 分享薪資平台</title>
+    <title>Sharlary-薪資分享平台</title>
 
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -39,6 +39,25 @@
   </head>
 
   <body>
+
+    <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '1426643654087816',
+        xfbml      : true,
+        version    : 'v2.10'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
 
     {% include 'components/header.html' %}
 
