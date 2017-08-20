@@ -109,7 +109,7 @@
                                 {% for comment in salary.comment.all %}
                                 <div class="list-group-item align-items-start">
                                     <div class="d-flex w-100 justify-content-between">
-                                      <h6 class="mb-1"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{comment.user_extend.user.id|add:"729"}}</h6>
+                                      <h6 class="mb-1"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{comment.user_extend.user.id|add:"11"}}</h6>
                                       <small>{{comment.created_time|timezone:local_tz|timesince}}{% trans '前' %}</small>
                                     </div>
                                     <p class="mb-1">{{comment.message|linebreaks}}</p>
@@ -121,7 +121,7 @@
                                 <div class="list-group-item flex-column align-items-start">
 
                                     <form id="comment_form" class="form-inline d-flex w-100 justify-content-between" method="POST" action="{% url 'comment_save' salary.id %}">{% csrf_token %}
-                                      <label for="message"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{user.id|add:"729"}}</label>
+                                      <label for="message"><i class="fa fa-user-circle-o" aria-hidden="true"></i> {{user.id|add:"11"}}</label>
                                       <textarea class="form-control mb-1 mr-sm-1 mb-sm-0" id="message" rows="3" maxlength="300" name="message"></textarea>
 
                                       <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-plus fa-lg" aria-hidden="true"></i></button>
