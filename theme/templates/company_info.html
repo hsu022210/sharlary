@@ -45,14 +45,14 @@
                             <a href="{{r.website}}" class="card-link"><i class="fa fa-building" aria-hidden="true"></i> {% trans "公司官網" %}</a>
                             {% endif %}
                         </div>
-                        <!-- Your send button code -->
-                        <div class="fb-share-button col-2"
-                             data-href="{{request.build_absolute_uri}}"
-                             data-layout="button"
-                             data-mobile_iframe="true">
-                        </div>
-                        <div class="line-it-button col-2" style="display: none;" data-type="share-c" data-lang="zh-Hant"></div>
-                        <script src="//scdn.line-apps.com/n/line_it/thirdparty/loader.min.js" async="async" defer="defer"></script>
+                        <!--&lt;!&ndash; Your send button code &ndash;&gt;-->
+                        <!--<div class="fb-share-button col-2"-->
+                             <!--data-href="{{request.build_absolute_uri}}"-->
+                             <!--data-layout="button"-->
+                             <!--data-mobile_iframe="true">-->
+                        <!--</div>-->
+                        <!--<div class="line-it-button col-2" style="display: none;" data-type="share-c" data-lang="zh-Hant"></div>-->
+                        <!--<script src="//scdn.line-apps.com/n/line_it/thirdparty/loader.min.js" async="async" defer="defer"></script>-->
 
                     </div>
 
@@ -146,7 +146,7 @@
 
 {% block extraJS %}
     <script src="{% static 'js/user_save_restaurant.js' %}" ajax_url="{% url 'user_save_company' %}" csrf_token="{{ csrf_token }}"></script>
-    <script type="text/javascript">
-      LineIt.loadButton();
-    </script>
+    <!--<script type="text/javascript">-->
+      <!--LineIt.loadButton();-->
+    <!--</script>-->
 {% endblock %}
