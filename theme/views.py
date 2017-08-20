@@ -182,7 +182,7 @@ def register(request):
             auth.login(request, user)
             user.email = user.username
             user.first_name = request.POST["first_name"].capitalize()
-            user.last_name = request.POST["last_name"].capitalize()
+            # user.last_name = request.POST["last_name"].capitalize()
             user.save()
             user_extend_object = UserExtend.objects.create(user=user)
             Salary.objects.filter(email=user.email).update(user_extend=user_extend_object)
