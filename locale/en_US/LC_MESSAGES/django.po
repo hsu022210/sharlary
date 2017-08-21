@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-21 02:24+0000\n"
+"POT-Creation-Date: 2017-08-21 10:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,12 +34,12 @@ msgid "國家"
 msgstr "Country"
 
 #: theme/templates/add_company.html:33 theme/templates/company_update.html:33
-#: theme/templates/index.html:66
+#: theme/templates/index.html:67
 msgid "城市"
 msgstr "City"
 
 #: theme/templates/add_company.html:42 theme/templates/company_update.html:46
-msgid "地址"
+msgid "街址"
 msgstr "Street"
 
 #: theme/templates/add_company.html:47 theme/templates/company_update.html:51
@@ -68,7 +68,7 @@ msgstr "Successfully added"
 msgid "新增失敗"
 msgstr "Add failed"
 
-#: theme/templates/company_info.html:18 theme/templates/index.html:130
+#: theme/templates/company_info.html:18 theme/templates/index.html:132
 msgid "薪資數據件數"
 msgstr "Salary data"
 
@@ -113,7 +113,7 @@ msgstr "Edit company"
 msgid "更改"
 msgstr "Update"
 
-#: theme/templates/company_update.html:83 theme/templates/index.html:187
+#: theme/templates/company_update.html:83 theme/templates/index.html:189
 #: theme/templates/user_salary_update.html:101
 msgid "更改成功"
 msgstr "Successfully update"
@@ -141,44 +141,44 @@ msgid "快於Sharlary匿名分享薪資一起讓企業公司待遇透明化！"
 msgstr ""
 "Let's share salary anonymously for making salaries in industries public!"
 
-#: theme/templates/components/header.html:28
+#: theme/templates/components/header.html:27
 msgid "關於Sharlary"
 msgstr "About Sharlary"
 
-#: theme/templates/components/header.html:29
+#: theme/templates/components/header.html:28
 msgid "希望透過大家匿名分享薪資讓待遇好的公司能被更多人看見"
 msgstr ""
 "Make those companies which pay better be seen through people sharing their "
 "salary"
 
-#: theme/templates/components/header.html:35
+#: theme/templates/components/header.html:34
 msgid "選項"
 msgstr "Options"
 
-#: theme/templates/components/header.html:37
+#: theme/templates/components/header.html:36
 #: theme/templates/registration/user_update.html:11
 msgid "更改個人資訊"
 msgstr "Change personal info"
 
-#: theme/templates/components/header.html:38
+#: theme/templates/components/header.html:37
 #: theme/templates/registration/user_password_change.html:11
 msgid "更改密碼"
 msgstr "Change password"
 
-#: theme/templates/components/header.html:39
+#: theme/templates/components/header.html:38
 msgid "我的收藏清單"
 msgstr "My saved list"
 
-#: theme/templates/components/header.html:40
+#: theme/templates/components/header.html:39
 #: theme/templates/user_salary.html:10
 msgid "我的薪資"
 msgstr "My salaries"
 
-#: theme/templates/components/header.html:47
+#: theme/templates/components/header.html:46
 msgid "登出"
 msgstr "Log out"
 
-#: theme/templates/components/header.html:49
+#: theme/templates/components/header.html:48
 #: theme/templates/registration/login.html:21
 #: theme/templates/registration/login.html:39
 #: theme/templates/registration/register.html:67
@@ -222,44 +222,44 @@ msgstr "Share your salary, make the pays in industries public."
 msgid "加入會員"
 msgstr "Sign up"
 
-#: theme/templates/index.html:51 theme/templates/index.html:92
+#: theme/templates/index.html:51 theme/templates/index.html:94
 msgid "收藏清單裡搜尋"
 msgstr "Search in saved list"
 
-#: theme/templates/index.html:53 theme/templates/index.html:94
+#: theme/templates/index.html:53 theme/templates/index.html:96
 #: theme/templates/search_company.html:32
 msgid "搜尋"
 msgstr "Search"
 
-#: theme/templates/index.html:72
+#: theme/templates/index.html:73
 msgid "產業"
 msgstr "Type"
 
-#: theme/templates/index.html:86
+#: theme/templates/index.html:88
 msgid "公司名稱 / 職位名稱"
 msgstr "Company / Title"
 
-#: theme/templates/index.html:160
+#: theme/templates/index.html:162
 msgid "無公司/職位符合搜尋結果"
 msgstr "No company or title match the search."
 
-#: theme/templates/index.html:163
+#: theme/templates/index.html:165
 msgid "還沒收藏任何公司哦"
 msgstr "You haven't saved any company."
 
-#: theme/templates/index.html:165
+#: theme/templates/index.html:167
 msgid "尚無公司加入Sharlary"
 msgstr "Coming soon"
 
-#: theme/templates/index.html:181
+#: theme/templates/index.html:183
 msgid "登入成功"
 msgstr "Logged in"
 
-#: theme/templates/index.html:183
+#: theme/templates/index.html:185
 msgid "已登出"
 msgstr "Logged out"
 
-#: theme/templates/index.html:185
+#: theme/templates/index.html:187
 msgid "註冊成功並登入"
 msgstr "Signed up and logged in"
 
