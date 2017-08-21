@@ -28,11 +28,20 @@ def index(request):
 
     ctx['GOOGLE_API_KEY'] = settings.GOOGLE_API_KEY
 
-    options_city = all_companies_qs.values_list("city", flat=True).distinct()
-    options_category = all_companies_qs.values_list("category", flat=True).distinct()
+    # options_city = all_companies_qs.values_list("city", flat=True).distinct()
+    # options_category = all_companies_qs.values_list("category", flat=True).distinct()
+    #
+    # ctx['options_city'] = options_city
+    # ctx['options_category'] = options_category
 
-    ctx['options_city'] = options_city
-    ctx['options_category'] = options_category
+    ctx['options_city'] = ["台北市", "新北市", "基隆市", "宜蘭縣", "桃園市", "新竹市", "新竹縣", "苗栗縣",
+                           "台中市", "彰化縣", "南投縣", "雲林縣", "嘉義市", "嘉義縣", "台南市", "高雄市",
+                           "屏東縣", "花蓮縣", "臺東縣", "澎湖縣"]
+
+    ctx['options_category'] = ["資訊業", "航空業", "電子業", "光電業", "製造業", "法律業", "醫療業", "服務業",
+                               "金融業", "不動產業", "保險業", "餐飲業", "飯店業", "營造業", "傳產業",
+                               "工程業", "運輸業", "倉儲業", "批發業", "貿易業", "設計業", "顧問業", "演藝業",
+                               "體育業", "自由業", "政府機關", "其他"]
 
     if request.user.is_authenticated():
         user_object = get_object_or_404(User, id=request.user.id)
