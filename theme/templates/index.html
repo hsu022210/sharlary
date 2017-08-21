@@ -61,21 +61,23 @@
                         <br>
                         <br>
 
-                        <div class="col-8 col-xs-5">
-                            <select class="custom-select" name="city" form="search_form">
-                              <option selected>{% trans "城市" %}</option>
-                              {% for op in options_city %}
-                              <option value="{{ op }}">{{ op }}</option>
-                              {% endfor %}
-                          </select>
-                          <select class="custom-select" name="category" form="search_form">
-                              <option selected>{% trans "產業" %}</option>
-                              {% for op in options_category %}
-                              <option value="{{ op }}">{{ op }}</option>
-                              {% endfor %}
-                          </select>
+                        <div class="col-6">
+                            <div class="row justify-content-center">
+                                <select class="custom-select col-5" name="city" form="search_form">
+                                    <option selected>{% trans "城市" %}</option>
+                                    {% for op in options_city %}
+                                    <option value="{{ op }}">{{ op }}</option>
+                                    {% endfor %}
+                                </select>
+                                <select class="custom-select col-5" name="category" form="search_form">
+                                    <option selected>{% trans "產業" %}</option>
+                                    {% for op in options_category %}
+                                    <option value="{{ op }}">{{ op }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
-                        <div class="col-4 col-xs-7">
+                        <div class="col-6">
                           {% if user_saved_list %}
                             <form action="{% url 'index' %}?redirect_type=user_saved_list" method="post" id="search_form">{% csrf_token %}
                           {% else %}
