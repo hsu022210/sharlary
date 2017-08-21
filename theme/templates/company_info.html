@@ -45,6 +45,9 @@
                             <a href="{{r.website}}" class="card-link"><i class="fa fa-building" aria-hidden="true"></i> {% trans "公司官網" %}</a>
                             {% endif %}
                         </div>
+
+                        <a href="{% url 'company_update' r.id %}" class="col-4 btn btn-sm btn-outline-primary btn-block"><i class="fa fa-pencil" aria-hidden="true"></i> {% trans "更改資訊" %}</a>
+
                         <!--&lt;!&ndash; Your send button code &ndash;&gt;-->
                         <!--<div class="fb-share-button col-2"-->
                              <!--data-href="{{request.build_absolute_uri}}"-->

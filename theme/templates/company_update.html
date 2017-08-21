@@ -7,19 +7,19 @@
     <section class="jumbotron background-grey">
         <div class="container">
 
-            <h2 class="jumbotron-heading text-center"><i class="fa fa-plus-square-o" aria-hidden="true"></i> {% trans "新增公司" %}</h2>
+            <h2 class="jumbotron-heading text-center"><i class="fa fa-pencil" aria-hidden="true"></i> {% trans "更改公司資訊" %}</h2>
             <br>
             <form action="" method="post">{% csrf_token %}
 
                 <div class="form-group">
                     <label for="name">{% trans "公司名稱" %}*</label>
-                    <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter company name" name="name" maxlength="50" required>
+                    <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter company name" name="name" maxlength="50" value="{{company.name}}" required>
                     <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
                 </div>
 
                 <div class="form-group">
                     <label for="website">{% trans "官網網址" %}</label>
-                    <input type="url" class="form-control" id="website" placeholder="Enter company url (optional)" name="website">
+                    <input type="url" class="form-control" id="website" placeholder="Enter company url (optional)" name="website" value="{{company.website}}">
                 </div>
 
                 <div class="form-group">
@@ -33,21 +33,29 @@
                     <label for="city">{% trans "城市" %}*</label>
                     <select class="form-control custom-select" id="city" name="city" required>
                         {% for op in city_option %}
-                            <option> {{op}} </option>
+                            {% if op == company.education %}
+                                <option selected="selected"> {{op}} </option>
+                            {% else %}
+                                <option> {{op}} </option>
+                            {% endif %}
                         {% endfor %}
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="street">{% trans "地址" %}*</label>
-                    <input type="text" class="form-control" id="street" placeholder="ex: 左營區博愛二路99號" name="street" required>
+                    <input type="text" class="form-control" id="street" placeholder="ex: 左營區博愛二路99號" name="street" value="{{company.street}}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="category">{% trans "類型" %}*</label>
                     <select class="form-control custom-select" id="category" name="category" required>
                         {% for op in category_option %}
-                            <option> {{op}} </option>
+                            {% if op == company.category %}
+                                <option selected="selected"> {{op}} </option>
+                            {% else %}
+                                <option> {{op}} </option>
+                            {% endif %}
                         {% endfor %}
                     </select>
                 </div>
@@ -58,10 +66,10 @@
 
                 <div class="row">
                     <div class="col-8">
-                        <button type="submit" class="btn btn-outline-primary btn-block">{% trans "新增" %}</button>
+                        <button type="submit" class="btn btn-outline-primary btn-block">{% trans "更改" %}</button>
                     </div>
                     <div class="col-4">
-                        <a href="{% url 'index' %}" class="btn btn-outline-danger btn-block">{% trans "取消" %}</a>
+                        <a href="{% url 'company_info' company.id %}" class="btn btn-outline-danger btn-block">{% trans "取消" %}</a>
                     </div>
                 </div>
             </form>
@@ -72,12 +80,12 @@
 {% block extraJS %}
     <script src='https://www.google.com/recaptcha/api.js'></script>
     {% if saved %}
-        <script src="{% static 'js/sweet_alert2_form_success.js' %}" title="{% trans '新增成功' %}" redirect_url="{% url 'share_salary' company_id %}"></script>
+        <script src="{% static 'js/sweet_alert2_form_success.js' %}" title="{% trans '更改成功' %}" redirect_url="{% url 'company_info' company_id %}"></script>
     {% elif recaptcha_error %}
         {% get_current_language as LANGUAGE_CODE %}
-        <script src="{% static 'js/sweet_alert2_form_error.js' %}" title="{% trans '新增失敗' %}" lang="{{ LANGUAGE_CODE }}" error_msg="{{ error_msg }}"></script>
+        <script src="{% static 'js/sweet_alert2_form_error.js' %}" title="{% trans '更改失敗' %}" lang="{{ LANGUAGE_CODE }}" error_msg="{{ error_msg }}"></script>
     {% elif address_error %}
     {% get_current_language as LANGUAGE_CODE %}
-    <script src="{% static 'js/sweet_alert2_form_error.js' %}" title="{% trans '新增失敗' %}" lang="{{ LANGUAGE_CODE }}" error_msg="{{ error_msg }}"></script>
+    <script src="{% static 'js/sweet_alert2_form_error.js' %}" title="{% trans '更改失敗' %}" lang="{{ LANGUAGE_CODE }}" error_msg="{{ error_msg }}"></script>
     {% endif %}
 {% endblock %}

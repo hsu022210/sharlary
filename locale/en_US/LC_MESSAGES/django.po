@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-20 08:30+0000\n"
+"POT-Creation-Date: 2017-08-21 02:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,54 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: theme/templates/add_company.html:117
+#: theme/templates/add_company.html:10 theme/templates/search_company.html:58
+msgid "新增公司"
+msgstr "Add company"
+
+#: theme/templates/add_company.html:15 theme/templates/company_update.html:15
+msgid "公司名稱"
+msgstr "Company name"
+
+#: theme/templates/add_company.html:21 theme/templates/company_update.html:21
+msgid "官網網址"
+msgstr "Official website"
+
+#: theme/templates/add_company.html:26 theme/templates/company_update.html:26
+msgid "國家"
+msgstr "Country"
+
+#: theme/templates/add_company.html:33 theme/templates/company_update.html:33
+#: theme/templates/index.html:66
+msgid "城市"
+msgstr "City"
+
+#: theme/templates/add_company.html:42 theme/templates/company_update.html:46
+msgid "地址"
+msgstr "Street"
+
+#: theme/templates/add_company.html:47 theme/templates/company_update.html:51
+msgid "類型"
+msgstr "Type"
+
+#: theme/templates/add_company.html:61 theme/templates/share_salary.html:85
+msgid "新增"
+msgstr "Add"
+
+#: theme/templates/add_company.html:64 theme/templates/company_update.html:72
+#: theme/templates/registration/user_password_change.html:41
+#: theme/templates/registration/user_password_reset.html:32
+#: theme/templates/registration/user_password_reset_confirm.html:38
+#: theme/templates/registration/user_update.html:40
+#: theme/templates/share_salary.html:88
+#: theme/templates/user_salary_update.html:87
+msgid "取消"
+msgstr "Cancel"
+
+#: theme/templates/add_company.html:75
 msgid "新增成功"
 msgstr "Successfully added"
 
-#: theme/templates/add_company.html:120 theme/templates/add_company.html:123
+#: theme/templates/add_company.html:78 theme/templates/add_company.html:81
 msgid "新增失敗"
 msgstr "Add failed"
 
@@ -33,28 +76,55 @@ msgstr "Salary data"
 msgid "公司官網"
 msgstr "Official website"
 
-#: theme/templates/company_info.html:70 theme/templates/index.html:24
+#: theme/templates/company_info.html:49
+msgid "更改資訊"
+msgstr "Edit"
+
+#: theme/templates/company_info.html:73 theme/templates/index.html:24
 #: theme/templates/share_salary.html:10 theme/templates/user_salary.html:35
 msgid "分享薪資"
 msgstr "Share salary"
 
-#: theme/templates/company_info.html:98 theme/templates/share_salary.html:39
+#: theme/templates/company_info.html:101 theme/templates/share_salary.html:39
 #: theme/templates/user_salary_update.html:39
 msgid "相關工作經驗年資"
 msgstr "Related working experience"
 
-#: theme/templates/company_info.html:99 theme/templates/share_salary.html:44
+#: theme/templates/company_info.html:102 theme/templates/share_salary.html:44
 #: theme/templates/user_salary_update.html:44
 msgid "教育程度"
 msgstr "Education level"
 
-#: theme/templates/company_info.html:101
+#: theme/templates/company_info.html:104
 msgid "學校科系"
 msgstr "School & major"
 
-#: theme/templates/company_info.html:113
+#: theme/templates/company_info.html:116
 msgid "前"
 msgstr " ago"
+
+#: theme/templates/company_update.html:10
+msgid "更改公司資訊"
+msgstr "Edit company"
+
+#: theme/templates/company_update.html:69
+#: theme/templates/registration/user_update.html:37
+#: theme/templates/user_salary_update.html:84
+msgid "更改"
+msgstr "Update"
+
+#: theme/templates/company_update.html:83 theme/templates/index.html:187
+#: theme/templates/user_salary_update.html:101
+msgid "更改成功"
+msgstr "Successfully update"
+
+#: theme/templates/company_update.html:86
+#: theme/templates/company_update.html:89
+#: theme/templates/registration/user_password_change.html:58
+#: theme/templates/registration/user_update.html:57
+#: theme/templates/user_salary_update.html:99
+msgid "更改失敗"
+msgstr "Updated failed"
 
 #: theme/templates/components/footer.html:9
 msgid "聯絡我們"
@@ -161,10 +231,6 @@ msgstr "Search in saved list"
 msgid "搜尋"
 msgstr "Search"
 
-#: theme/templates/index.html:66
-msgid "城市"
-msgstr "City"
-
 #: theme/templates/index.html:72
 msgid "產業"
 msgstr "Type"
@@ -197,10 +263,6 @@ msgstr "Logged out"
 msgid "註冊成功並登入"
 msgstr "Signed up and logged in"
 
-#: theme/templates/index.html:187 theme/templates/user_salary_update.html:101
-msgid "更改成功"
-msgstr "Successfully update"
-
 #: theme/templates/registration/login.html:14
 #: theme/templates/registration/register.html:14
 msgid "您已經登入囉"
@@ -225,6 +287,9 @@ msgid "登入失敗"
 msgstr "Log in failed"
 
 #: theme/templates/registration/register.html:29
+#: theme/templates/registration/register.html:30
+#: theme/templates/registration/user_update.html:19
+#: theme/templates/registration/user_update.html:20
 msgid "名字"
 msgstr "First name"
 
@@ -272,21 +337,6 @@ msgstr "Confirm new password"
 #: theme/templates/registration/user_password_reset_confirm.html:35
 msgid "送出"
 msgstr "Submit"
-
-#: theme/templates/registration/user_password_change.html:41
-#: theme/templates/registration/user_password_reset.html:32
-#: theme/templates/registration/user_password_reset_confirm.html:38
-#: theme/templates/registration/user_update.html:40
-#: theme/templates/share_salary.html:88
-#: theme/templates/user_salary_update.html:87
-msgid "取消"
-msgstr "Cancel"
-
-#: theme/templates/registration/user_password_change.html:58
-#: theme/templates/registration/user_update.html:57
-#: theme/templates/user_salary_update.html:99
-msgid "更改失敗"
-msgstr "Updated failed"
 
 #: theme/templates/registration/user_password_reset.html:11
 #: theme/templates/registration/user_password_reset_confirm.html:11
@@ -336,11 +386,6 @@ msgstr ""
 "If you didn't receive the letter, please make sure you've entered the email "
 "address that you signed up with, and check your spam folder."
 
-#: theme/templates/registration/user_update.html:37
-#: theme/templates/user_salary_update.html:84
-msgid "更改"
-msgstr "Update"
-
 #: theme/templates/search_company.html:10
 msgid "查詢公司"
 msgstr "Search company"
@@ -354,10 +399,6 @@ msgstr "Company name, ex: Tesla"
 #| msgid "無公司/職位符合搜尋結果"
 msgid "無公司符合搜尋結果"
 msgstr "No company or title match the search."
-
-#: theme/templates/search_company.html:58
-msgid "新增公司"
-msgstr "Add company"
 
 #: theme/templates/share_salary.html:18
 #: theme/templates/user_salary_update.html:18
@@ -418,10 +459,6 @@ msgstr "300 words maximum"
 #: theme/templates/user_salary_update.html:79
 msgid "年終，認股，工作內容，上下班時間，心得"
 msgstr "Bonus, stock, job description, working time"
-
-#: theme/templates/share_salary.html:85
-msgid "新增"
-msgstr "Add"
 
 #: theme/templates/share_salary.html:99
 msgid "分享成功"

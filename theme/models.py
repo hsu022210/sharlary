@@ -21,6 +21,12 @@ class Company(models.Model):
         return self.name
 
 
+class CompanyForm(ModelForm):
+    class Meta:
+        model = Company
+        fields = ['name', 'website', 'country', 'city', 'street', 'category']
+
+
 class ProfileForm(ModelForm):
     class Meta:
         model = User

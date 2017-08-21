@@ -228,6 +228,15 @@ def user_update(request):
 
 def add_company(request):
     ctx = {}
+
+    ctx['city_option'] = ["台北市", "新北市", "基隆市", "宜蘭縣", "桃園市", "新竹市", "新竹縣", "苗栗縣",
+                          "台中市", "彰化縣", "南投縣", "雲林縣", "嘉義市", "嘉義縣", "台南市", "高雄市",
+                          "屏東縣", "花蓮縣", "臺東縣", "澎湖縣"]
+    ctx['category_option'] = ["資訊業", "航空業", "電子業", "光電業", "製造業", "法律業", "醫療業", "服務業",
+                              "金融業", "不動產業", "保險業", "餐飲業", "飯店業", "營造業", "傳產業",
+                              "工程業", "運輸業", "倉儲業", "批發業", "貿易業", "設計業", "顧問業", "演藝業",
+                              "體育業", "自由業", "政府機關", "其他"]
+
     ctx['GOOGLE_RECAPTCHA_SITE_KEY'] = settings.GOOGLE_RECAPTCHA_SITE_KEY
     if request.method == "POST":
         result = recaptcha_validation(request)
@@ -389,3 +398,56 @@ def comment_save(request, salary_id):
         comment.user_extend = request.user.user_extend
         comment.save()
     return redirect('company_info', company_id=salary_object.company.id)
+
+
+def company_update(request, company_id):
+    ctx = {}
+    ctx['GOOGLE_RECAPTCHA_SITE_KEY'] = settings.GOOGLE_RECAPTCHA_SITE_KEY
+    company_object = get_object_or_404(Company, id=company_id)
+    ctx['company'] = company_object
+    ctx['city_option'] = ["台北市", "新北市", "基隆市", "宜蘭縣", "桃園市", "新竹市", "新竹縣", "苗栗縣",
+                          "台中市", "彰化縣", "南投縣", "雲林縣", "嘉義市", "嘉義縣", "台南市", "高雄市",
+                          "屏東縣", "花蓮縣", "臺東縣", "澎湖縣"]
+    ctx['category_option'] = ["資訊業", "航空業", "電子業", "光電業", "製造業", "法律業", "醫療業", "服務業",
+                              "金融業", "不動產業", "保險業", "餐飲業", "飯店業", "營造業", "傳產業",
+                              "工程業", "運輸業", "倉儲業", "批發業", "貿易業", "設計業", "顧問業", "演藝業",
+                              "體育業", "自由業", "政府機關", "其他"]
+
+    form = CompanyForm(instance=company_object)
+
+    if request.method == 'POST':
+        result = recaptcha_validation(request)
+
+        if result['success']:
+            country = request.POST["country"]
+            city = request.POST["city"]
+            street = request.POST["street"]
+
+            params = {'sensor': 'false', 'address': country + city + street}
+            response = requests.get(settings.GOOGLE_GEOCODE_URL, params=params)
+            results = response.json()['results']
+
+            if len(results) == 1:
+                location = results[0]['geometry']['location']
+                latitude = location['lat']
+                longitude = location['lng']
+
+                form = CompanyForm(data=request.POST, instance=company_object)
+                if form.is_valid():
+                    company = form.save()
+
+                    company.latitude = latitude
+                    company.longitude = longitude
+                    company.save()
+                    ctx['saved'] = True
+                    ctx['company_id'] = company_id
+            else:
+                ctx['address_error'] = True
+                ctx['error_msg'] = "請輸入詳細且正確的地址"
+
+        else:
+            ctx['recaptcha_error'] = True
+            ctx['error_msg'] = "Google reCAPTCHA 認證失敗"
+
+    ctx['form'] = form
+    return render(request, 'company_update.html', ctx)
