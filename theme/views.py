@@ -198,14 +198,14 @@ def register(request):
 
             subject = '{0} ，歡迎加入Sharlary！'.format(user.first_name)
             from_email = settings.DEFAULT_FROM_EMAIL
-            text_content = 'Hi {0}！快快分享薪資一起讓就業環境變得更好！\n\n\n The Sharlary Team'.format(user.first_name)
+            text_content = 'Hi {0}！快快分享薪資一起讓就業環境變得更好！\n\n\n https://www.sharlary.ga \n\n\n The Sharlary Team'.format(user.first_name)
 
             send_mail(
                 subject,
                 text_content,
                 from_email,
                 [user.email],
-                fail_silently=False
+                # fail_silently=False
             )
             return redirect(reverse_lazy('index') + '?redirect_type=register')
     else:
