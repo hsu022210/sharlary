@@ -322,7 +322,7 @@ def share_salary(request, company_id):
                        education=education, school=school, major=major, other=other)
             company.update_time = s.update_time
             company.save()
-            
+
             if request.user.is_authenticated():
                 user_object = get_object_or_404(User, id=request.user.id)
             else:

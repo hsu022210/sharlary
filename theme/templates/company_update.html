@@ -33,7 +33,7 @@
                     <label for="city">{% trans "城市" %}*</label>
                     <select class="form-control custom-select" id="city" name="city" required>
                         {% for op in city_option %}
-                            {% if op == company.education %}
+                            {% if op == company.city %}
                                 <option selected="selected"> {{op}} </option>
                             {% else %}
                                 <option> {{op}} </option>
