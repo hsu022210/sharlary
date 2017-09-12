@@ -336,6 +336,19 @@ def share_salary(request, company_id):
                 user_extend_object.save()
 
             ctx['saved'] = True
+
+            subject = '感謝您於Sharlary分享薪資！'
+            from_email = settings.DEFAULT_FROM_EMAIL
+            text_content = '歡迎您有空回來Sharlary看看薪資分享資訊！\n\n\n https://www.sharlary.ga \n\n\n The Sharlary Team'
+
+            send_mail(
+                subject,
+                text_content,
+                from_email,
+                [email],
+                # fail_silently=False
+            )
+
         else:
             ctx['recaptcha_error'] = True
             ctx['error_msg'] = "Google reCAPTCHA 認證失敗"
