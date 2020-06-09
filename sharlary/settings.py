@@ -13,9 +13,11 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 if os.environ.get('EMAIL_HOST_USER'):
-    from extra_py import private_info_heroku as private_info
+    # from extra_py import private_info_heroku as private_info
+    from . import private_info_heroku as private_info
 else:
-    from extra_py import private_info
+    # from .extra_py import private_info
+    from . import private_info as private_info
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
